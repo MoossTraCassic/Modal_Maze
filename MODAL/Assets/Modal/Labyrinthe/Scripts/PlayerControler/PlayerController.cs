@@ -26,15 +26,18 @@ namespace ModalFunctions.Controller
         // Update is called once per frame
         void Update()
         {
+            Debug.Log(Input.GetAxis("Axis_9"));
             Move();
         }
 
         private void Move()
         {
+
+            // Handle walking movement
             var horizontal = Input.GetAxis("Horizontal");
             var vertical = Input.GetAxis("Vertical");
 
-            if (Input.GetButton("RightOne")) 
+            if (Input.GetButton("RightOne") && speedFactor != 1f) 
             {
                 speedFactor = speedFactor < 1 ? speedFactor += 0.05f : speedFactor = 1;
             }
@@ -46,6 +49,7 @@ namespace ModalFunctions.Controller
             animator.SetFloat("WalkSpeed", vertical * speedFactor);
             animator.SetFloat("TurnSpeed", horizontal * speedFactor);
 
+            // Handle Jumping
             if (Input.GetButtonDown("Jump") && animator.GetCurrentAnimatorStateInfo(0).IsName("Motion"))
             {
                 rigidbody.AddForce(Vector3.up * JumpForce);
@@ -60,7 +64,25 @@ namespace ModalFunctions.Controller
             {
                 animator.SetBool("Grounded", false);
                 Vector3 jumpDirection = transform.forward * (speedFactor - 0.5f) * 2f;
+                //jumpDirection = JumpForce * rigidbody.velocity.normalized;
                 rigidbody.AddForce(jumpDirection * JumpForce);
+            }
+
+            // Handle Fire
+            if (Input.GetButtonDown("LeftTwo") && animator.GetCurrentAnimatorStateInfo(0).IsName("Motion"))
+            {
+                animator.SetBool("GoFire", true);
+                //rigidbody.AddTorque(transform.up * 1000f * horizontal);
+
+            }
+            if (Input.GetButton("LeftTwo") && speedFactor != 1f)
+            {
+                speedFactor = speedFactor < 1 ? speedFactor += 0.05f : speedFactor = 1;
+            }
+            if (Input.GetButtonUp("LeftTwo"))
+            {
+                animator.SetBool("GoFire", false);
+                speedFactor = 0.5f;
             }
 
         }
