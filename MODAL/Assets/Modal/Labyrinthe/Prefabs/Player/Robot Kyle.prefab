@@ -36,6 +36,7 @@ Transform:
   - {fileID: 1008317637141928534}
   - {fileID: 8288111889259756279}
   - {fileID: 6094840767580313727}
+  - {fileID: 1429408836997464509}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -105,6 +106,7 @@ MonoBehaviour:
     m_Bits: 256
   groundDistance: 1
   JumpForce: 500
+  canGoInAir: 0
 --- !u!1 &3193453169676109780
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,6 +189,36 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.2702459, y: -0.041899867, z: -0.00000008940697}
     m_Extent: {x: 0.95254505, y: 0.23127717, z: 0.6514181}
   m_DirtyAABB: 0
+--- !u!1 &5598828118690976082
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1429408836997464509}
+  m_Layer: 0
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1429408836997464509
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5598828118690976082}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3193453168690463088}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6694084383666382949
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,13 +262,13 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10
+  m_Intensity: 5
   m_Range: 10
-  m_SpotAngle: 30
+  m_SpotAngle: 54.9
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -272,7 +304,7 @@ Light:
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 3
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -384,13 +416,13 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.1
+  m_Intensity: 0.5
   m_Range: 10
-  m_SpotAngle: 30
+  m_SpotAngle: 55
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -440,6 +472,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3193453168690463088}
     m_Modifications:
+    - target: {fileID: 2108208156142149018, guid: 7101df07abed5bd44bfc844fc11d3053,
+        type: 3}
+      propertyPath: m_Name
+      value: Orbe_1
+      objectReference: {fileID: 0}
     - target: {fileID: 4737767991634398402, guid: 7101df07abed5bd44bfc844fc11d3053,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -533,7 +570,22 @@ PrefabInstance:
     - target: {fileID: 6250463667194656496, guid: 7101df07abed5bd44bfc844fc11d3053,
         type: 3}
       propertyPath: turnSpeed
-      value: 35
+      value: -35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6250463667194656496, guid: 7101df07abed5bd44bfc844fc11d3053,
+        type: 3}
+      propertyPath: translateSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6250463667194656496, guid: 7101df07abed5bd44bfc844fc11d3053,
+        type: 3}
+      propertyPath: center
+      value: 
+      objectReference: {fileID: 1429408836997464509}
+    - target: {fileID: 6255699968251186999, guid: 7101df07abed5bd44bfc844fc11d3053,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9095896995368716974, guid: 7101df07abed5bd44bfc844fc11d3053,
         type: 3}
@@ -634,6 +686,16 @@ PrefabInstance:
         type: 3}
       propertyPath: turnSpeed
       value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6250463667194656496, guid: 7101df07abed5bd44bfc844fc11d3053,
+        type: 3}
+      propertyPath: center
+      value: 
+      objectReference: {fileID: 1429408836997464509}
+    - target: {fileID: 6255699968251186999, guid: 7101df07abed5bd44bfc844fc11d3053,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9095896995368716974, guid: 7101df07abed5bd44bfc844fc11d3053,
         type: 3}

@@ -13,9 +13,12 @@ namespace ModalFunctions.Controller
         public float groundDistance = 1f;
         public float JumpForce = 500f;
 
+        public bool canGoInAir = false;
+
         private Animator animator;
-        private Rigidbody rigidbody;
+        private new Rigidbody rigidbody;
         private float speedFactor = 0.5f;
+        private bool fired = false;
         // Start is called before the first frame update
         void Start()
         {
@@ -26,7 +29,7 @@ namespace ModalFunctions.Controller
         // Update is called once per frame
         void Update()
         {
-            Debug.Log(Input.GetAxis("Axis_9"));
+            //Debug.Log(Input.GetAxis("Axis_9"));
             Move();
         }
 
@@ -36,10 +39,12 @@ namespace ModalFunctions.Controller
             // Handle walking movement
             var horizontal = Input.GetAxis("Horizontal");
             var vertical = Input.GetAxis("Vertical");
+            bool running = false;
 
-            if (Input.GetButton("RightOne") && speedFactor != 1f) 
+            if (Input.GetButton("RightOne") && speedFactor != 1f && animator.GetCurrentAnimatorStateInfo(0).IsName("Motion")) 
             {
                 speedFactor = speedFactor < 1 ? speedFactor += 0.05f : speedFactor = 1;
+                running = true;
             }
             if(Input.GetButtonUp("RightOne"))
             {
@@ -49,11 +54,23 @@ namespace ModalFunctions.Controller
             animator.SetFloat("WalkSpeed", vertical * speedFactor);
             animator.SetFloat("TurnSpeed", horizontal * speedFactor);
 
-            // Handle Jumping
+            // Handle Jumping and goInAir
             if (Input.GetButtonDown("Jump") && animator.GetCurrentAnimatorStateInfo(0).IsName("Motion"))
             {
-                rigidbody.AddForce(Vector3.up * JumpForce);
-                animator.SetTrigger("Jump");
+                if (canGoInAir)
+                {
+                    animator.SetTrigger("GoInObservation");
+                }
+                else
+                {
+                    rigidbody.AddForce(Vector3.up * JumpForce);
+                    animator.SetTrigger("Jump");
+                }
+            }
+            if(Input.GetButtonDown("Jump") && animator.GetBool("Observe"))
+            {
+                animator.SetBool("Observe", false);
+                //rigidbody.AddForce(Vector3.forward * JumpForce * 10f);
             }
 
             if (Physics.Raycast(transform.position + (Vector3.up * 0.5f), Vector3.down, groundDistance, ground))
@@ -68,22 +85,38 @@ namespace ModalFunctions.Controller
                 rigidbody.AddForce(jumpDirection * JumpForce);
             }
 
-            // Handle Fire
-            if (Input.GetButtonDown("LeftTwo") && animator.GetCurrentAnimatorStateInfo(0).IsName("Motion"))
+            // Handle Go Fire Position
+            var goFire = Input.GetAxis("Axis_9");
+            var fire = Input.GetAxis("Axis_10");
+            if (goFire >= 0.5f && animator.GetCurrentAnimatorStateInfo(0).IsName("Motion"))
             {
                 animator.SetBool("GoFire", true);
-                //rigidbody.AddTorque(transform.up * 1000f * horizontal);
-
-            }
-            if (Input.GetButton("LeftTwo") && speedFactor != 1f)
-            {
                 speedFactor = speedFactor < 1 ? speedFactor += 0.05f : speedFactor = 1;
+                //rigidbody.AddTorque(transform.up * 1000f * horizontal);
             }
-            if (Input.GetButtonUp("LeftTwo"))
+            if (goFire == 0f && !running )
             {
                 animator.SetBool("GoFire", false);
-                speedFactor = 0.5f;
+                speedFactor = speedFactor > 0.5f ? speedFactor -= 0.05f : speedFactor = 0.5f;
             }
+
+            // Handle Fire
+            if(Input.GetAxisRaw("Axis_10") == 1f && animator.GetCurrentAnimatorStateInfo(0).IsName("FirePose"))
+            {
+                if (!fired)
+                {
+                    animator.SetTrigger("Fire");
+
+                    fired = true;
+                }
+            }
+            if(Input.GetAxisRaw("Axis_10") == 0f)
+            {
+                fired = false;
+            }
+
+            // Handle Observation
+
 
         }
     }
