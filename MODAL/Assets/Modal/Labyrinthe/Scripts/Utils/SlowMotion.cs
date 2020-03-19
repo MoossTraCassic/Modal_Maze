@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace ModalFunctions.Utils
 {
-    public class SlowMotion : StateMachineBehaviour
+    public class SlowMotion : MonoBehaviour
     {
         public TimeManager timeManager;
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-        override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        private void OnTriggerEnter(Collider other)
         {
             timeManager.DoSlowDown();
         }

@@ -106,7 +106,7 @@ MonoBehaviour:
     m_Bits: 256
   groundDistance: 1
   JumpForce: 500
-  canGoInAir: 0
+  canGoInAir: 1
 --- !u!1 &3193453169676109780
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,7 +416,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 1.5
   m_Range: 10
   m_SpotAngle: 55
   m_InnerSpotAngle: 21.80208

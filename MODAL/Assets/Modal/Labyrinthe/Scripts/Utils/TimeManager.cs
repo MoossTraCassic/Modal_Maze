@@ -31,6 +31,7 @@ namespace ModalFunctions.Utils
                 {
                     StopCoroutine(CountSeconds(oneSecond));
                     slowMotion = false;
+                    Debug.Log("Done");
                 }
             }
             
