@@ -18,7 +18,9 @@ namespace ModalFunctions.Controller
         private Animator animator;
         private new Rigidbody rigidbody;
         private float speedFactor = 0.5f;
+
         private bool fired = false;
+        private bool stopRunning = false;
         // Start is called before the first frame update
         void Start()
         {
@@ -48,7 +50,16 @@ namespace ModalFunctions.Controller
             }
             if(Input.GetButtonUp("RightOne"))
             {
-                speedFactor = 0.5f;
+                stopRunning = true;
+            }
+            if (stopRunning && animator.GetCurrentAnimatorStateInfo(0).IsName("Motion"))
+            {
+                speedFactor = speedFactor > 0.5f ? speedFactor -= 0.05f : speedFactor = 0.5f;
+                if(speedFactor == 0.5f)
+                {
+                    //Debug.Log("Walk");
+                    stopRunning = false;
+                }
             }
 
             animator.SetFloat("WalkSpeed", vertical * speedFactor);
@@ -91,7 +102,7 @@ namespace ModalFunctions.Controller
             if (goFire >= 0.5f && animator.GetCurrentAnimatorStateInfo(0).IsName("Motion"))
             {
                 animator.SetBool("GoFire", true);
-                speedFactor = speedFactor < 1 ? speedFactor += 0.05f : speedFactor = 1;
+                speedFactor = speedFactor < 1 ? speedFactor += 0.06f : speedFactor = 1;
                 //rigidbody.AddTorque(transform.up * 1000f * horizontal);
             }
             if (goFire == 0f && !running )
@@ -101,7 +112,8 @@ namespace ModalFunctions.Controller
             }
 
             // Handle Fire
-            if(Input.GetAxisRaw("Axis_10") == 1f && animator.GetCurrentAnimatorStateInfo(0).IsName("FirePose"))
+            // Input.GetAxisRaw("Axis_10") == 1f
+            if (fire >= 0.5f && animator.GetCurrentAnimatorStateInfo(0).IsName("FirePose"))
             {
                 if (!fired)
                 {

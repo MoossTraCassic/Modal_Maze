@@ -12,16 +12,22 @@ namespace ModalFunctions.Utils
         public Transform center;
 
         private Transform pivot;
+        private Vector3 orbit = new Vector3(3.65f , 0.3f, 0f);
         private Vector3 beginPosition;
         private Vector3 sens;
+        private Bullet bullet;
         private float translateDistance = 2f;
+        private float givenTurnSpeed;
 
 
         private void Start()
         {
             pivot = GetComponent<Transform>();
             beginPosition = center.position;
+            bullet = GetComponentInChildren<Bullet>();
+
             sens = Vector3.down;
+            givenTurnSpeed = turnSpeed;
         }
         // Update is called once per frame
         void Update()
@@ -38,6 +44,24 @@ namespace ModalFunctions.Utils
                 //sens *= -1;
             }
             
+        }
+
+        public void StopRotation()
+        {
+            turnSpeed = translateSpeed = 0f;
+        }
+
+        public void resetRotation()
+        {
+            turnSpeed = givenTurnSpeed;
+            translateSpeed = 0.2f;
+
+           /* int interpolation = 5;
+            for (int i = 0; i < interpolation; i++)
+            {
+                bullet.transform.localPosition = Vector3.MoveTowards(bullet.transform.position, orbit, 0.5f);
+            }*/
+            bullet.transform.localPosition = orbit;
         }
     }
 }

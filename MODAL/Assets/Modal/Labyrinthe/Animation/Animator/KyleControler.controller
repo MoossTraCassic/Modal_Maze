@@ -126,7 +126,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.2
+  m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.7470205
   m_HasExitTime: 0
@@ -586,7 +586,7 @@ BlendTree:
       type: 3}
     m_Threshold: -1
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 1.5
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: WalkSpeed
     m_Mirror: 0
@@ -595,7 +595,7 @@ BlendTree:
       type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 0.75
+    m_TimeScale: 0.5
     m_CycleOffset: 0
     m_DirectBlendParameter: WalkSpeed
     m_Mirror: 0
@@ -604,7 +604,7 @@ BlendTree:
       type: 3}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 1.5
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: WalkSpeed
     m_Mirror: 0
