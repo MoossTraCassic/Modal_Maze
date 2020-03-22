@@ -24,7 +24,7 @@ namespace ModalFunctions.Utils
             {
                 animator.SetBool("Observe", true);
                 rigidbody.useGravity = false;
-                timeManager.DoSlowDown();
+                //timeManager.DoSlowDown();
                 //timeManager.secondsToPast(5f);
                 //Debug.Log("Done");
             }

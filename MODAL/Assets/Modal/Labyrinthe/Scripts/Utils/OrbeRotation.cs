@@ -55,13 +55,24 @@ namespace ModalFunctions.Utils
         {
             turnSpeed = givenTurnSpeed;
             translateSpeed = 0.2f;
-
-           /* int interpolation = 5;
+            /*
+            int interpolation = 50;
             for (int i = 0; i < interpolation; i++)
             {
-                bullet.transform.localPosition = Vector3.MoveTowards(bullet.transform.position, orbit, 0.5f);
-            }*/
+                bullet.transform.localPosition = Vector3.Lerp(bullet.transform.localPosition, orbit, 0.5f);
+            }
+            */
             bullet.transform.localPosition = orbit;
+        }
+
+        IEnumerator resetOrbite()
+        {
+            while((bullet.transform.localPosition - orbit).magnitude > 0.05f)
+            {
+                bullet.transform.localPosition = Vector3.Lerp(bullet.transform.localPosition, orbit, 0.1f);
+                yield return null;
+            }
+            print("Coroutine ended");
         }
     }
 }

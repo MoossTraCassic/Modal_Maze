@@ -16,13 +16,62 @@ namespace ModalFunctions.Utils
 
         public Transform handPosition;
 
+        public float bulletSpeed = 10000f;
+
         private int activeBullet = 0;
         private List<GameObject> clones = new List<GameObject>();
+        private GameObject currentOrbe;
         private bool rotationReset = true;
         private bool joined = false;
+        private bool coroutineCalled = false;
 
         void Start()
         {
+            SpawnOrbes();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if(activeBullet <= 0 && !coroutineCalled)
+            {
+                StartCoroutine(WaitAndSpawn());
+                coroutineCalled = true;
+            }
+
+            if (PlayerIsInFireMode())
+            {
+                PrepareBullet();
+
+                if(joined && PlayerHasFired())
+                {
+                    MoveBullet();
+                }
+            }
+
+            if (!PlayerIsInFireMode() && !rotationReset)
+            {
+                foreach(GameObject orbeClone in clones)
+                {
+                    if (orbeClone != null)
+                    {
+                        Bullet bullet = orbeClone.GetComponentInChildren<Bullet>();
+                        if (!bullet.Shooted())
+                        {
+                            bullet.DisableElements();
+                            orbeClone.GetComponent<OrbeRotation>().resetRotation();
+                        }
+                    }
+                }
+                rotationReset = true;
+                joined = false;
+            } 
+        }
+
+        void SpawnOrbes()
+        {
+            clones.Clear();
+
             GameObject orbe0 = Instantiate<GameObject>(orbes[activeBullet], parent);
             orbe0.GetComponent<OrbeRotation>().center = center;
             clones.Add(orbe0);
@@ -32,57 +81,77 @@ namespace ModalFunctions.Utils
             orbe1.GetComponent<OrbeRotation>().center = center;
             clones.Add(orbe1);
             activeBullet++;
-        }
 
-        // Update is called once per frame
-        void Update()
-        {
-            if (PlayerIsInFirePose())
-            {
-                PrepareBullet();
-            }
-
-            if (!PlayerIsInFirePose() && !rotationReset)
-            {
-                foreach(GameObject clone in clones)
-                {
-                    if(clone != null)
-                    {
-                        clone.GetComponent<OrbeRotation>().resetRotation();
-                    }
-                }
-                rotationReset = true;
-                joined = false;
-            }
+            coroutineCalled = false;
         }
 
         void PrepareBullet()
         {
-            GameObject currentOrbe = clones[activeBullet - 1];
-            currentOrbe.GetComponent<OrbeRotation>().StopRotation();
+            if (activeBullet > 0)
+            {
+                currentOrbe = clones[activeBullet - 1];
+                currentOrbe.GetComponent<OrbeRotation>().StopRotation();
 
-            Bullet bullet = currentOrbe.GetComponentInChildren<Bullet>();
-            if ((bullet.transform.position - handPosition.position).magnitude <= 0.01f) // animations to play here
-            {
-                joined = true;
-               
-                //bullet.transform.position = handPosition.position;
-            }
-            else
-            {
-                if (!joined)
+                Bullet bullet = currentOrbe.GetComponentInChildren<Bullet>();
+                if ((bullet.transform.position - handPosition.position).magnitude <= 0.1f) // particle to play here
                 {
-                    bullet.transform.position = Vector3.MoveTowards(bullet.transform.position, handPosition.position, 0.8f);
-                    bullet.transform.rotation = handPosition.rotation;
+                    joined = true;
+                    bullet.transform.position = handPosition.position;
+                    bullet.EnableElements();
                 }
+                else
+                {
+                    joined = false;
+                    if (!joined)
+                    {
+                        bullet.transform.position = Vector3.MoveTowards(bullet.transform.position, handPosition.position, 0.8f);
+                        bullet.transform.rotation = handPosition.rotation;
+                    }
+                }
+                rotationReset = false;
             }
-            rotationReset = false;
+            /*else
+            {
+                StartCoroutine(WaitAndSpawn());
+            }*/
         }
 
-        bool PlayerIsInFirePose()
+        IEnumerator WaitAndSpawn()
+        {
+            yield return new WaitForSeconds(5f);
+            SpawnOrbes();
+            //Debug.Log(activeBullet);
+            //Debug.Log(clones.Count);
+        }
+
+        void MoveBullet()
+        {
+            Bullet bullet = currentOrbe.GetComponentInChildren<Bullet>();
+            if (!bullet.Shooted())
+            {
+                bullet.SetShooted();
+                //bullet.transform.position += bullet.transform.forward * bulletSpeed * Time.deltaTime;
+                bullet.GetRigidBody().AddForce(bullet.transform.forward * bulletSpeed);
+                bullet.EnableGravity();
+                DestroyCurrentOrbe();
+            }
+        }
+
+        void DestroyCurrentOrbe()
+        {
+            Destroy(currentOrbe, 3f);
+            activeBullet--;
+        }
+
+        bool PlayerIsInFireMode()
         {
             return animator.GetCurrentAnimatorStateInfo(0).IsName("FirePose") ||
                    animator.GetCurrentAnimatorStateInfo(0).IsName("KyleFire");
+        }
+
+        bool PlayerHasFired()
+        {
+            return animator.GetCurrentAnimatorStateInfo(0).IsName("KyleFire");
         }
     }
 }

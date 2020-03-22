@@ -15,11 +15,11 @@ namespace ModalFunctions.Utils
 
         private void Update()
         {
-            //Time.timeScale += (1f / slowDownLength) * Time.unscaledDeltaTime;
-            //Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
-            if (slowMotion)
+            Time.timeScale += (1f / slowDownLength) * Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
+           /* if (slowMotion)
             {
-                StartCoroutine(CountSeconds(oneSecond));
+                //StartCoroutine(CountSeconds(oneSecond));
                 //Debug.Log(seconds);
                 if (seconds >= slowDownLength)
                 {
@@ -29,11 +29,11 @@ namespace ModalFunctions.Utils
                 }
                 if(Time.timeScale == 1f)
                 {
-                    StopCoroutine(CountSeconds(oneSecond));
+                    //StopCoroutine(CountSeconds(oneSecond));
                     slowMotion = false;
                     Debug.Log("Done");
                 }
-            }
+            }*/
             
         }
 
@@ -44,7 +44,7 @@ namespace ModalFunctions.Utils
         }
         public void DoSlowDown()
         {
-            slowMotion = true;
+            //slowMotion = true;
             Time.timeScale = slowDownFactor;
             Time.fixedDeltaTime = Time.timeScale * 0.05f;
         }

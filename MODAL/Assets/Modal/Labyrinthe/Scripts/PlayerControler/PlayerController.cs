@@ -113,7 +113,7 @@ namespace ModalFunctions.Controller
 
             // Handle Fire
             // Input.GetAxisRaw("Axis_10") == 1f
-            if (fire >= 0.5f && animator.GetCurrentAnimatorStateInfo(0).IsName("FirePose"))
+            if (fire >= 0.8f && animator.GetCurrentAnimatorStateInfo(0).IsName("FirePose"))
             {
                 if (!fired)
                 {
@@ -122,7 +122,7 @@ namespace ModalFunctions.Controller
                     fired = true;
                 }
             }
-            if(Input.GetAxisRaw("Axis_10") == 0f)
+            if(fire == 0f)
             {
                 fired = false;
             }
