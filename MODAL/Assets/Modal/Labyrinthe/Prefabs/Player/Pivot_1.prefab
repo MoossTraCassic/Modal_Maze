@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1007142522541852256}
   - component: {fileID: 3503128147761088234}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 6255699968251186999}
   - component: {fileID: 4148237896416264370}
   - component: {fileID: 8776642524038088770}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Orbe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5559300457244798046}
   - component: {fileID: 6250463667194656496}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pivot_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

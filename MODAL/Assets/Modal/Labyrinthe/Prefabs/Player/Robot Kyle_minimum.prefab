@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &175170385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 175170386}
+  m_Layer: 10
+  m_Name: Hand_Orbe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &175170386
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175170385}
+  m_LocalRotation: {x: -0.50559926, y: 0.24124247, z: -0.23285846, w: 0.79495186}
+  m_LocalPosition: {x: 0.326, y: 0.405, z: 0.094}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8993300592236967904}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -43.749, y: 58.973003, z: -58.234}
 --- !u!1 &574790716505687019
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,9 +43,9 @@ GameObject:
   - component: {fileID: 6621780514202151867}
   - component: {fileID: 8637122837509781250}
   - component: {fileID: 3330743137421022735}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Robot Kyle_minimum
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,6 +137,7 @@ MonoBehaviour:
     m_Bits: 256
   groundDistance: 1
   JumpForce: 500
+  bulletManager: {fileID: 0}
   canGoInAir: 1
 --- !u!1 &2390171908342904518
 GameObject:
@@ -117,7 +148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6118338334753790559}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: toFollow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8993300592236967904}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right_Wrist_Joint_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,7 +195,8 @@ Transform:
   m_LocalRotation: {x: 0.88637483, y: -0.46296597, z: -0.0013830652, w: -0.00066276174}
   m_LocalPosition: {x: 0.5339239, y: 0.9735279, z: -0.046329837}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 175170386}
   m_Father: {fileID: 3576219588210553336}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -177,7 +209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 153857138513266701}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1214738841998349954}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1089133637994860861}
   - component: {fileID: 2145737161392529536}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Robot2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +351,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1760126378874303640}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,10 +434,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6343025309837615981, guid: 5f45191bcf8e2c2458f914b53ca9dc50,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8095292439742854584, guid: 5f45191bcf8e2c2458f914b53ca9dc50,
         type: 3}
       propertyPath: m_Name
       value: Lights
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095292439742854584, guid: 5f45191bcf8e2c2458f914b53ca9dc50,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8850673713310538307, guid: 5f45191bcf8e2c2458f914b53ca9dc50,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f45191bcf8e2c2458f914b53ca9dc50, type: 3}

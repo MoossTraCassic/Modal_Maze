@@ -22,9 +22,10 @@ namespace ModalFunctions.Utils
         {
             if (other.CompareTag("Player"))
             {
+                print("entered");
                 animator.SetBool("Observe", true);
                 rigidbody.useGravity = false;
-                //timeManager.DoSlowDown();
+                timeManager.DoSlowDown();
                 //timeManager.secondsToPast(5f);
             }
         }
@@ -34,6 +35,7 @@ namespace ModalFunctions.Utils
             {
                 animator.SetBool("Observe", false);
                 rigidbody.useGravity = true;
+                timeManager.UnDoSlowMotion();
             }
         }
 

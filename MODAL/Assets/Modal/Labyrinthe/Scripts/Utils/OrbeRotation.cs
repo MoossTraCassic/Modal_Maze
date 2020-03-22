@@ -53,7 +53,7 @@ namespace ModalFunctions.Utils
 
         public void Accelerate()
         {
-            turnSpeed = givenTurnSpeed  * (500f / 35f);
+            turnSpeed = givenTurnSpeed  * (300f / 35f);
             translateSpeed = 0.8f;
         }
 

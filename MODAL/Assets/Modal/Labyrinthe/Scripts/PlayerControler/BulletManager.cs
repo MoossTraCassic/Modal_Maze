@@ -100,7 +100,7 @@ namespace ModalFunctions.Utils
                 currentOrbe.GetComponent<OrbeRotation>().StopRotation();
 
                 Bullet bullet = currentOrbe.GetComponentInChildren<Bullet>();
-                if ((bullet.transform.position - handPosition.position).magnitude <= 0.1f) // particle to play here
+                if ((bullet.transform.position - handPosition.position).magnitude <= 0.25f) // particle to play here
                 {
                     joined = true;
                     bullet.transform.position = handPosition.position;
