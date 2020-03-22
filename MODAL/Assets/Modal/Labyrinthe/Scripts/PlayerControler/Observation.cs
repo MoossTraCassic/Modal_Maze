@@ -12,7 +12,7 @@ namespace ModalFunctions.Utils
         private Animator animator;
         private new Rigidbody rigidbody;
 
-        private void Awake()
+        private void Start()
         {
             animator = player.GetComponent<Animator>();
             rigidbody = player.GetComponent<Rigidbody>();
@@ -26,19 +26,8 @@ namespace ModalFunctions.Utils
                 rigidbody.useGravity = false;
                 //timeManager.DoSlowDown();
                 //timeManager.secondsToPast(5f);
-                //Debug.Log("Done");
             }
         }
-        /*
-        private void OnTriggerStay(Collider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                rigidbody.AddForce( -Physics.gravity * 0.5f); // againt gravity
-            }
-
-        }
-        */
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -50,9 +39,13 @@ namespace ModalFunctions.Utils
 
         private void Update()
         {
+            FollowPlayer();
+        }
+
+        void FollowPlayer()
+        {
             Vector3 playerPosition = player.transform.position;
             transform.position = new Vector3(playerPosition.x, transform.position.y, playerPosition.z);
         }
-
     }
 }

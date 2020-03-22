@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ModalFunctions.Utils;
 
 namespace ModalFunctions.Controller
 {
@@ -12,7 +13,7 @@ namespace ModalFunctions.Controller
         [Tooltip("Distance from ground to be considered as landed")]
         public float groundDistance = 1f;
         public float JumpForce = 500f;
-
+        public BulletManager bulletManager;
         public bool canGoInAir = false;
 
         private Animator animator;
@@ -21,6 +22,7 @@ namespace ModalFunctions.Controller
 
         private bool fired = false;
         private bool stopRunning = false;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -31,7 +33,6 @@ namespace ModalFunctions.Controller
         // Update is called once per frame
         void Update()
         {
-            //Debug.Log(Input.GetAxis("Axis_9"));
             Move();
         }
 
@@ -70,6 +71,13 @@ namespace ModalFunctions.Controller
             {
                 if (canGoInAir)
                 {
+                    foreach (GameObject orbeClone in bulletManager.GetClones())
+                    {
+                        if (orbeClone != null)
+                        {
+                            orbeClone.GetComponent<OrbeRotation>().Accelerate();
+                        }
+                    }
                     animator.SetTrigger("GoInObservation");
                 }
                 else
@@ -80,6 +88,13 @@ namespace ModalFunctions.Controller
             }
             if(Input.GetButtonDown("Jump") && animator.GetBool("Observe"))
             {
+                foreach (GameObject orbeClone in bulletManager.GetClones())
+                {
+                    if (orbeClone != null)
+                    {
+                        orbeClone.GetComponent<OrbeRotation>().Decelerate();
+                    }
+                }
                 animator.SetBool("Observe", false);
                 //rigidbody.AddForce(Vector3.forward * JumpForce * 10f);
             }
@@ -92,7 +107,6 @@ namespace ModalFunctions.Controller
             {
                 animator.SetBool("Grounded", false);
                 Vector3 jumpDirection = transform.forward * (speedFactor - 0.5f) * 2f;
-                //jumpDirection = JumpForce * rigidbody.velocity.normalized;
                 rigidbody.AddForce(jumpDirection * JumpForce);
             }
 
@@ -103,7 +117,6 @@ namespace ModalFunctions.Controller
             {
                 animator.SetBool("GoFire", true);
                 speedFactor = speedFactor < 1 ? speedFactor += 0.06f : speedFactor = 1;
-                //rigidbody.AddTorque(transform.up * 1000f * horizontal);
             }
             if (goFire == 0f && !running )
             {
@@ -112,7 +125,6 @@ namespace ModalFunctions.Controller
             }
 
             // Handle Fire
-            // Input.GetAxisRaw("Axis_10") == 1f
             if (fire >= 0.8f && animator.GetCurrentAnimatorStateInfo(0).IsName("FirePose"))
             {
                 if (!fired)

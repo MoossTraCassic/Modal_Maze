@@ -51,6 +51,17 @@ namespace ModalFunctions.Utils
             turnSpeed = translateSpeed = 0f;
         }
 
+        public void Accelerate()
+        {
+            turnSpeed = givenTurnSpeed  * (500f / 35f);
+            translateSpeed = 0.8f;
+        }
+
+        public void Decelerate()
+        {
+            turnSpeed = givenTurnSpeed;
+            translateSpeed = 0.2f;
+        }
         public void resetRotation()
         {
             turnSpeed = givenTurnSpeed;

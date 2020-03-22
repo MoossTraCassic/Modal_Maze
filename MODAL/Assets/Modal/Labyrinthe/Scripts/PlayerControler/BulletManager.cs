@@ -14,6 +14,8 @@ namespace ModalFunctions.Utils
         [Tooltip("The center of OrbeRotation")]
         public Transform center;
 
+        public float waitTime = 10f;
+
         public Transform handPosition;
 
         public float bulletSpeed = 10000f;
@@ -24,6 +26,11 @@ namespace ModalFunctions.Utils
         private bool rotationReset = true;
         private bool joined = false;
         private bool coroutineCalled = false;
+
+        public List<GameObject> GetClones()
+        {
+            return clones;
+        }
 
         void Start()
         {
@@ -118,7 +125,7 @@ namespace ModalFunctions.Utils
 
         IEnumerator WaitAndSpawn()
         {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(waitTime);
             SpawnOrbes();
             //Debug.Log(activeBullet);
             //Debug.Log(clones.Count);
@@ -126,14 +133,17 @@ namespace ModalFunctions.Utils
 
         void MoveBullet()
         {
-            Bullet bullet = currentOrbe.GetComponentInChildren<Bullet>();
-            if (!bullet.Shooted())
+            if (currentOrbe != null)
             {
-                bullet.SetShooted();
-                //bullet.transform.position += bullet.transform.forward * bulletSpeed * Time.deltaTime;
-                bullet.GetRigidBody().AddForce(bullet.transform.forward * bulletSpeed);
-                bullet.EnableGravity();
-                DestroyCurrentOrbe();
+                Bullet bullet = currentOrbe.GetComponentInChildren<Bullet>();
+                if (!bullet.Shooted())
+                {
+                    bullet.SetShooted();
+                    //bullet.transform.position += bullet.transform.forward * bulletSpeed * Time.deltaTime;
+                    bullet.GetRigidBody().AddForce(bullet.transform.forward * bulletSpeed);
+                    bullet.EnableGravity();
+                    DestroyCurrentOrbe();
+                }
             }
         }
 
