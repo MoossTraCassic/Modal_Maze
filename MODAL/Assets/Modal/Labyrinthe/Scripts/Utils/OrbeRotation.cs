@@ -18,6 +18,7 @@ namespace ModalFunctions.Utils
         private Bullet bullet;
         private float translateDistance = 2f;
         private float givenTurnSpeed;
+        private IEnumerator reset;
 
 
         private void Start()
@@ -49,6 +50,11 @@ namespace ModalFunctions.Utils
         public void StopRotation()
         {
             turnSpeed = translateSpeed = 0f;
+
+            if(reset != null) 
+            {
+                StopCoroutine(reset);
+            }
         }
 
         public void Accelerate()
@@ -66,24 +72,24 @@ namespace ModalFunctions.Utils
         {
             turnSpeed = givenTurnSpeed;
             translateSpeed = 0.2f;
-            /*
-            int interpolation = 50;
-            for (int i = 0; i < interpolation; i++)
+            //bullet.transform.localPosition = orbit;
+            if(reset != null) 
             {
-                bullet.transform.localPosition = Vector3.Lerp(bullet.transform.localPosition, orbit, 0.5f);
+                StopCoroutine(reset);
             }
-            */
-            bullet.transform.localPosition = orbit;
+            reset = resetOrbite();
+            StartCoroutine(reset);
         }
 
         IEnumerator resetOrbite()
         {
             while((bullet.transform.localPosition - orbit).magnitude > 0.05f)
             {
-                bullet.transform.localPosition = Vector3.Lerp(bullet.transform.localPosition, orbit, 0.1f);
+                bullet.transform.localPosition = Vector3.Lerp(bullet.transform.localPosition, orbit, 0.05f);
                 yield return null;
             }
-            print("Coroutine ended");
+            bullet.transform.localPosition = orbit;
+            //print("Coroutine ended");
         }
     }
 }

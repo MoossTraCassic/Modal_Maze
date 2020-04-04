@@ -3,6 +3,259 @@ using System.Collections.Generic;
 using UnityEngine;
 using ModalFunctions.Utils;
 
+
+namespace ModalFunctions.Controller
+{
+    public class PlayerController : MonoBehaviour
+    {
+        // public static PlayerController instance;
+        // public delegate bool EmptyHandle();
+        // public event EmptyHandle ObserveTimeOver;
+
+        [Tooltip("Layer Representing Ground")]
+        public LayerMask ground;
+
+        [Tooltip("Distance from ground to be considered as landed")]
+        public float groundDistance = 0.1f;
+        public float JumpForce = 500f;
+        public BulletManager bulletManager;
+        public TimeManager timeManager;
+        public bool canGoInAir = false;
+
+        private Animator animator;
+        private new Rigidbody rigidbody;
+        private float speedFactor = 0.5f;
+
+        private float m_horizontal;
+        private float m_vertical;
+        private float m_goFire;
+        private float m_fire;
+
+        private bool fired = false;
+        private bool running = false;
+        private bool stopRunning = false;
+        private bool grounded = true;
+        private bool jump = false;
+        private bool inFirePose = false;
+         
+        
+        /*void Awake()
+        {
+            instance = this;
+        }*/
+        
+        // Start is called before the first frame update
+        void Start()
+        {
+            animator = GetComponent<Animator>();
+            rigidbody = GetComponent<Rigidbody>();
+        }
+
+        void Update()
+        {
+            Move();
+        }
+
+        private void GroundMovement()
+        {
+            // running = false;
+           /* 
+            if (Input.GetButton("RightOne") && speedFactor != 1f)
+            {
+                speedFactor = speedFactor < 1 ? speedFactor += 0.05f : speedFactor = 1;
+                running = true;
+            }
+            if (Input.GetButtonUp("RightOne"))
+            {
+                stopRunning = true;
+            }
+            if (stopRunning)
+            {
+                speedFactor = speedFactor > 0.5f ? speedFactor -= 0.05f : speedFactor = 0.5f;
+                if (speedFactor == 0.5f)
+                {
+                    stopRunning = false;
+                }
+            }
+            */
+            
+            if (Input.GetButtonDown("RightOne"))
+            {
+                speedFactor = 1f;
+            }
+            if (Input.GetButtonUp("RightOne"))
+            {
+                speedFactor = 0.5f;
+            }
+            
+        }
+
+        private void JumpMovement()
+        {
+            speedFactor = 0.5f;
+            if (canGoInAir)
+            {
+                foreach (GameObject orbeClone in bulletManager.GetClones())
+                {
+                    if (orbeClone != null)
+                    {
+                        orbeClone.GetComponent<OrbeRotation>().Accelerate();
+                    }
+                }
+                animator.SetTrigger("GoInObservation");
+            }
+            else
+            {
+                rigidbody.AddForce(Vector3.up * JumpForce);
+                animator.SetTrigger("Jump");
+            }
+        }
+        public void FallFromObserveState(float smoothTranslate)
+        {
+            print("Start Addforce");
+            foreach (GameObject orbeClone in bulletManager.GetClones())
+            {
+                if (orbeClone != null)
+                {
+                    orbeClone.GetComponent<OrbeRotation>().Decelerate();
+                }
+            }
+            // animator.SetBool("Observe", false);
+            StartCoroutine(AddForceToGrounded(smoothTranslate));
+        }
+
+        private IEnumerator AddForceToGrounded(float forceAmount)
+        {
+            while (!grounded)
+            {
+                Vector3 jumpDirection = transform.forward + 0.25f * transform.up ;
+                rigidbody.AddForce(jumpDirection * forceAmount);
+                forceAmount -= 0.025f * forceAmount;
+                yield return null;
+            }
+            canGoInAir = false;
+            // timeManager.ResetTimePassed();
+            print("Landed");
+        }
+
+        private void CheckGroundStatus()
+        {
+            if (Physics.Raycast(transform.position + (Vector3.up * 0.5f), Vector3.down, groundDistance, ground))
+            {
+                animator.SetBool("Grounded", true);
+            }
+            else
+            {
+                animator.SetBool("Grounded", false);
+                /*
+                                Vector3 v = (animator.deltaPosition) / Time.deltaTime;
+
+                                // we preserve the existing y part of the current velocity.
+                                v.y = rigidbody.velocity.y;
+                                rigidbody.velocity = v;
+                */
+                // willl produce error if uncomment
+                //Vector3 jumpDirection = transform.forward * (speedFactor - 0.5f); // * rigidbody.velocity.normalized.z * 8f;
+                //rigidbody.AddForce(jumpDirection * JumpForce);
+            }
+        }
+
+        private void ResetSpeedForFire()
+        {
+            if (m_goFire >= 0.5f && animator.GetCurrentAnimatorStateInfo(0).IsName("Motion"))
+            {
+                animator.SetBool("GoFire", true);
+                //speedFactor = speedFactor < 1 ? speedFactor += 0.06f : speedFactor = 1;
+            }
+            if (m_goFire < 0.5f )//&& !running)
+            {
+                animator.SetBool("GoFire", false);
+                //speedFactor = speedFactor > 0.5f ? speedFactor -= 0.05f : speedFactor = 0.5f;
+            }
+        }
+
+        private void Move()
+        {
+            m_horizontal = Input.GetAxis("Horizontal");
+            m_vertical = Input.GetAxis("Vertical");
+
+            m_vertical = Mathf.Clamp(m_vertical * speedFactor, 0f, 1f);
+            m_horizontal = Mathf.Clamp(m_horizontal, -1f, 1f);
+
+            animator.SetFloat("WalkSpeed", m_vertical, 0.4f, Time.deltaTime);
+            animator.SetFloat("TurnSpeed", m_horizontal, 0.6f, Time.deltaTime);
+
+
+            m_goFire = Input.GetAxis("Axis_9");
+            m_fire = Input.GetAxis("Axis_10");
+
+            grounded = animator.GetCurrentAnimatorStateInfo(0).IsName("Motion");
+            jump = Input.GetButtonDown("Jump");
+            inFirePose = animator.GetCurrentAnimatorStateInfo(0).IsName("FirePose");
+
+            if (grounded)
+            {
+                GroundMovement();
+            }
+
+            if (jump && grounded)
+            {
+                JumpMovement();
+            }
+            if (jump && animator.GetBool("Observe") && !timeManager.TimePassed())
+            {
+                timeManager.ResetTimePassed();
+                FallFromObserveState(800f);
+            }
+            if (timeManager.TimePassed())
+            {
+                FallFromObserveState(100f);
+                timeManager.ResetTimePassed();
+            }
+          /*  if(ObserveTimeOver != null)
+            {
+                if (ObserveTimeOver())
+                {
+                    FallFromObserveState();
+                }
+            }*/
+
+            CheckGroundStatus();
+
+
+            ResetSpeedForFire();
+
+            if (m_fire >= 0.8f && inFirePose)
+            {
+                Fire();
+            }
+            if (m_fire < 0.8f)
+            {
+                fired = false;
+            }
+            /*
+            m_vertical = Mathf.Clamp(m_vertical * speedFactor, 0f, 1f);
+            m_horizontal = Mathf.Clamp(m_horizontal * speedFactor, -1f, 1f);
+
+            animator.SetFloat("WalkSpeed", m_vertical, 0.5f, Time.deltaTime);
+            animator.SetFloat("TurnSpeed", m_horizontal, 0.5f, Time.deltaTime);
+            */
+        }
+
+        private void Fire()
+        {
+            if (!fired)
+            {
+                animator.SetTrigger("Fire");
+
+                fired = true;
+            }
+        }
+
+    }
+}
+
+/*
 namespace ModalFunctions.Controller
 {
     public class PlayerController : MonoBehaviour
@@ -145,3 +398,4 @@ namespace ModalFunctions.Controller
         }
     }
 }
+*/

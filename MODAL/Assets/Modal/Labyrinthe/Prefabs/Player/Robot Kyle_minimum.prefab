@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 6621780514202151867}
   - component: {fileID: 8637122837509781250}
   - component: {fileID: 3330743137421022735}
+  - component: {fileID: 1769376480}
   m_Layer: 10
   m_Name: Robot Kyle_minimum
   m_TagString: Player
@@ -127,7 +128,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 574790716505687019}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 736dba71542b183478b9d57dbe6e074c, type: 3}
   m_Name: 
@@ -138,7 +139,26 @@ MonoBehaviour:
   groundDistance: 1
   JumpForce: 500
   bulletManager: {fileID: 0}
-  canGoInAir: 1
+  canGoInAir: 0
+--- !u!114 &1769376480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574790716505687019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db4b3dd638cd494cb053997ebe7c9eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ground:
+    serializedVersion: 2
+    m_Bits: 256
+  groundDistance: 1
+  JumpForce: 500
+  bulletManager: {fileID: 0}
+  canGoInAir: 0
 --- !u!1 &2390171908342904518
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,8 @@ namespace ModalFunctions.Utils
         private float seconds = 0f;
         private bool slowMotion = false;
         private float oneSecond = 1f;
+        private bool timePassed = false;
+        private IEnumerator timeCount;
         /*
         void Update()
         {
@@ -42,9 +44,15 @@ namespace ModalFunctions.Utils
             
         } 
         */
-        public void secondsToPast(float secondsToReach)
+        public void PassTime(float secondsToReach)
         {
-            StartCoroutine(CountSeconds(secondsToReach));
+            if(timeCount != null)
+            {
+                StopCoroutine(timeCount);
+            }
+
+            timeCount = CountSeconds(secondsToReach);
+            StartCoroutine(timeCount);
             //StopCoroutine(CountSeconds(secondsToReach));
         }
         public void DoSlowDown()
@@ -64,7 +72,6 @@ namespace ModalFunctions.Utils
                 yield return null;
             }
             Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
-            print("Coroutine ended");
         }
 
         public void UnDoSlowMotion()
@@ -75,8 +82,28 @@ namespace ModalFunctions.Utils
 
         IEnumerator CountSeconds(float secondsToReach)
         {
-            yield return new WaitForSecondsRealtime(secondsToReach);
-            seconds++;
+            seconds = 0f;
+            while (seconds < secondsToReach)
+            {
+                seconds++;
+                print(seconds);
+                yield return new WaitForSecondsRealtime(oneSecond);
+            }
+            timePassed = true;
+        }
+
+        public bool TimePassed()
+        {
+            return timePassed;
+        }
+        public void ResetTimePassed()
+        {
+            timePassed = false;
+            if(timeCount != null)
+            {
+                print("timePassed Stoped");
+                StopCoroutine(timeCount);
+            }
         }
     }
 }

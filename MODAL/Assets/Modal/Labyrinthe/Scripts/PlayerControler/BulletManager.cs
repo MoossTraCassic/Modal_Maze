@@ -27,6 +27,9 @@ namespace ModalFunctions.Utils
         private bool joined = false;
         private bool coroutineCalled = false;
 
+        [SerializeField]
+        private Transform rayOrigin;
+
         public List<GameObject> GetClones()
         {
             return clones;
@@ -111,7 +114,7 @@ namespace ModalFunctions.Utils
                     joined = false;
                     if (!joined)
                     {
-                        bullet.transform.position = Vector3.MoveTowards(bullet.transform.position, handPosition.position, 0.8f);
+                        bullet.transform.position = Vector3.MoveTowards(bullet.transform.position, handPosition.position, 0.5f);
                         bullet.transform.rotation = handPosition.rotation;
                     }
                 }
@@ -127,8 +130,6 @@ namespace ModalFunctions.Utils
         {
             yield return new WaitForSeconds(waitTime);
             SpawnOrbes();
-            //Debug.Log(activeBullet);
-            //Debug.Log(clones.Count);
         }
 
         void MoveBullet()
@@ -140,7 +141,8 @@ namespace ModalFunctions.Utils
                 {
                     bullet.SetShooted();
                     //bullet.transform.position += bullet.transform.forward * bulletSpeed * Time.deltaTime;
-                    bullet.GetRigidBody().AddForce(bullet.transform.forward * bulletSpeed);
+                    Vector3 bulletDirection = rayOrigin.transform.forward + 0.15f * rayOrigin.transform.up; 
+                    bullet.GetRigidBody().AddForce(bulletDirection * bulletSpeed);
                     bullet.EnableGravity();
                     DestroyCurrentOrbe();
                 }
@@ -149,8 +151,10 @@ namespace ModalFunctions.Utils
 
         void DestroyCurrentOrbe()
         {
-            Destroy(currentOrbe, 3f);
+            joined = false;
             activeBullet--;
+            Destroy(currentOrbe, 3f);
+            //activeBullet--;
         }
 
         bool PlayerIsInFireMode()

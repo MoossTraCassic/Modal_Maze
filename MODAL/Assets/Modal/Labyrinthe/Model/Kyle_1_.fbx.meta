@@ -38,7 +38,7 @@ ModelImporter:
       name: KyleForFireIdleTurnRight_F.001
       takeName: KyleForFireIdleTurnRight_F.001
       internalID: 0
-      firstFrame: 20.9
+      firstFrame: 20
       lastFrame: 57
       wrapMode: 0
       orientationOffsetY: 0
@@ -47,7 +47,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 1
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 1
       loopBlendPositionXZ: 0
