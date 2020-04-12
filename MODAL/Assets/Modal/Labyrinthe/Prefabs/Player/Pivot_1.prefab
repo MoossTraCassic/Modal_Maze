@@ -89,16 +89,16 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.6052722
       - serializedVersion: 3
-        time: 0.11912192
-        value: 0.16429043
-        inSlope: -1.3437777
-        outSlope: -1.3437777
+        time: 0.062694915
+        value: 0.20715237
+        inSlope: -3.9190717
+        outSlope: -3.9190717
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.90565825
+        inWeight: 1
         outWeight: 0.2377818
       - serializedVersion: 3
-        time: 0.41353494
+        time: 0.25365335
         value: 0
         inSlope: 0.039962497
         outSlope: 0.039962497
@@ -107,7 +107,16 @@ TrailRenderer:
         inWeight: 0.34763128
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.9999922
+        time: 0.57680255
+        value: 0
+        inSlope: -0.0060609137
+        outSlope: -0.0060609137
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
         value: 0
         inSlope: 0.000040132276
         outSlope: 0.000040132276

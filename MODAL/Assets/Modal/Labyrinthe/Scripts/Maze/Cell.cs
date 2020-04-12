@@ -10,6 +10,8 @@ namespace ModalFunctions.Maze
 
         private CellEdge[] edges = new CellEdge[MazeDirections.Count];
 
+        private int initializedEdgeCount;
+
         public CellEdge GetEdge(MazeDirection direction)
         {
             return edges[(int)direction];
@@ -20,7 +22,7 @@ namespace ModalFunctions.Maze
             edges[(int)direction] = edge;
         }
         */
-        private int initializedEdgeCount;
+        
 
         public bool IsFullyInitialized
         {

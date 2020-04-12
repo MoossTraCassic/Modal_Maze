@@ -27,7 +27,6 @@ namespace ModalFunctions.Maze
             {
                 RestartMaze();
             }
-
         }
 
         private void Generate()

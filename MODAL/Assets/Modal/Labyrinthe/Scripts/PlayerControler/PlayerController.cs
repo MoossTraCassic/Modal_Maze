@@ -112,7 +112,7 @@ namespace ModalFunctions.Controller
         }
         public void FallFromObserveState(float smoothTranslate)
         {
-            print("Start Addforce");
+            // print("Start Addforce");
             foreach (GameObject orbeClone in bulletManager.GetClones())
             {
                 if (orbeClone != null)
@@ -135,7 +135,7 @@ namespace ModalFunctions.Controller
             }
             canGoInAir = false;
             // timeManager.ResetTimePassed();
-            print("Landed");
+            ///print("Landed");
         }
 
         private void CheckGroundStatus()
