@@ -10,7 +10,7 @@ namespace ModalFunctions.Maze
         public IntVector2 size;      // Rewrite later to manage the difficulty of a level
 
         [Tooltip("Representation of a cell of the Maze")]
-        public Cell cellPrefab;
+        public List<Cell> cellPrefabs;
 
         public float mazeScaleXZ = 3f;
         public float mazeScaleY = 6f;
@@ -65,7 +65,7 @@ namespace ModalFunctions.Maze
                 activeCells.RemoveAt(currentIndex);
                 return;
             }
-            MazeDirection direction = currentCell.RandomUninitializedDirection; ;
+            MazeDirection direction = currentCell.RandomUninitializedDirection;
             IntVector2 coordinates = currentCell.coordinates + direction.ToIntVector2();
             if (ContainsCoordinates(coordinates))// && GetCell(coordinates) == null)
             {
@@ -96,6 +96,7 @@ namespace ModalFunctions.Maze
 
         private Cell CreateCell(IntVector2 coordinates)
         {
+            Cell cellPrefab = cellPrefabs[Random.Range(0,cellPrefabs.Count)];
             Cell newCell = Instantiate<Cell>(cellPrefab);
             cells[coordinates.x, coordinates.z] = newCell;
             newCell.coordinates = coordinates;

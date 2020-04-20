@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3724007542944017643
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2931935292431536613}
+  - component: {fileID: 5019699194460049292}
+  m_Layer: 0
+  m_Name: Maze_MP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2931935292431536613
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3724007542944017643}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5019699194460049292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3724007542944017643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c868c8441dd4004094b16b6e8bc9b49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size:
+    x: 10
+    z: 10
+  cellPrefabs:
+  - {fileID: 4144596639225371723, guid: 5be5335b6b5ae46449e340679a24ebb1, type: 3}
+  - {fileID: 4144596639225371723, guid: 5be5335b6b5ae46449e340679a24ebb1, type: 3}
+  - {fileID: 4144596639225371723, guid: dcf9a84591ec6bd47b11643dd72cb322, type: 3}
+  - {fileID: 4144596639225371723, guid: 00b7b6be333e79946b8568798b90845d, type: 3}
+  - {fileID: 4144596639225371723, guid: aaaa1c34d4728da4dba83d210bbfe517, type: 3}
+  mazeScaleXZ: 40
+  mazeScaleY: 20
+  passagePrefab: {fileID: 2367078924702119372, guid: 321a1678420c82342885f3870c5565b7,
+    type: 3}
+  wallPrefab: {fileID: 1821880878369901959, guid: ebfd37bcd40837f47884bfd4174754e6,
+    type: 3}
