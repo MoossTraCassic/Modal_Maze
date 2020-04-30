@@ -18,6 +18,7 @@ namespace ModalFunctions.Maze
         private void Start()
         {
             Generate();
+            // NaveMeshBaker.instance.bake = true;
         }
 
         // Update is called once per frame
@@ -26,6 +27,7 @@ namespace ModalFunctions.Maze
             if (Input.GetKeyDown(KeyCode.Backspace))  // Rewrite using a GUi Button in Menu
             {
                 RestartMaze();
+                // NaveMeshBaker.instance.bake = true;
             }
         }
 

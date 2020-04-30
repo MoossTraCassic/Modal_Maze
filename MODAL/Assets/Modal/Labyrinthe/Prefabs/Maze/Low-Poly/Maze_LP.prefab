@@ -44,10 +44,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size:
-    x: 8
-    z: 8
+    x: 4
+    z: 4
   cellPrefabs:
   - {fileID: 1667115702485122725, guid: 0848dfd533de56c4b9dab43a96de3872, type: 3}
+  - {fileID: 6809413396392520582, guid: 67593edfd198fd34eb6047684c0cd13f, type: 3}
+  - {fileID: 1667115702485122725, guid: 0848dfd533de56c4b9dab43a96de3872, type: 3}
+  - {fileID: 1667115702485122725, guid: 0848dfd533de56c4b9dab43a96de3872, type: 3}
+  - {fileID: 1667115702485122725, guid: 0848dfd533de56c4b9dab43a96de3872, type: 3}
+  - {fileID: 1667115702485122725, guid: 0848dfd533de56c4b9dab43a96de3872, type: 3}
+  - {fileID: 1667115702485122725, guid: 0848dfd533de56c4b9dab43a96de3872, type: 3}
+  - {fileID: 1667115702485122725, guid: 0848dfd533de56c4b9dab43a96de3872, type: 3}
+  - {fileID: 1667115702485122725, guid: 0848dfd533de56c4b9dab43a96de3872, type: 3}
+  - {fileID: 1667115702485122725, guid: 0848dfd533de56c4b9dab43a96de3872, type: 3}
+  - {fileID: 1667115702485122725, guid: 79c248161bdf3dd4681408d8b10503cf, type: 3}
   mazeScaleXZ: 40
   mazeScaleY: 20
   passagePrefab: {fileID: 2367078924702119372, guid: 321a1678420c82342885f3870c5565b7,

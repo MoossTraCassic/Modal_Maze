@@ -81,7 +81,7 @@ namespace ModalFunctions.Controller
             
             if (Input.GetButtonDown("RightOne"))
             {
-                speedFactor = 1f;
+                speedFactor = 0.9f;
             }
             if (Input.GetButtonUp("RightOne"))
             {
@@ -183,7 +183,7 @@ namespace ModalFunctions.Controller
             m_horizontal = Mathf.Clamp(m_horizontal, -1f, 1f);
 
             animator.SetFloat("WalkSpeed", m_vertical, 0.4f, Time.deltaTime);
-            animator.SetFloat("TurnSpeed", m_horizontal, 0.6f, Time.deltaTime);
+            animator.SetFloat("TurnSpeed", m_horizontal, 0.2f, Time.deltaTime);
 
 
             m_goFire = Input.GetAxis("Axis_9");

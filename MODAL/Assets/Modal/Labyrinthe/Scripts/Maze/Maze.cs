@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace ModalFunctions.Maze
 {
@@ -107,6 +108,7 @@ namespace ModalFunctions.Maze
             // new Vector3(coordinates.x * mazeScaleXZ - size.x * mazeScaleXZ * 0.5f, 0f, coordinates.z * mazeScaleXZ - size.z * mazeScaleXZ * 0.5f);
             newCell.transform.localScale *= mazeScaleXZ;
 
+            // NaveMeshBaker.instance.GetNavMeshSurfaces().Add(newCell.GetComponentInChildren<NavMeshSurface>());
             return newCell;
         }
 
