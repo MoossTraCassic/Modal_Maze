@@ -35,8 +35,10 @@ namespace ModalFunctions.Controller
         private bool running = false;
         private bool stopRunning = false;
         private bool grounded = true;
+        private bool raycast_grounded = true;
         private bool jump = false;
         private bool inFirePose = false;
+        private bool gravityByScript = false;
          
         
         /*void Awake()
@@ -49,6 +51,11 @@ namespace ModalFunctions.Controller
         {
             animator = GetComponent<Animator>();
             rigidbody = GetComponent<Rigidbody>();
+            if (rigidbody.isKinematic)
+            {
+                gravityByScript = true;
+                //print(gravityByScript);
+            }
         }
 
         void Update()
@@ -143,10 +150,13 @@ namespace ModalFunctions.Controller
             if (Physics.Raycast(transform.position + (Vector3.up * 0.5f), Vector3.down, groundDistance, ground))
             {
                 animator.SetBool("Grounded", true);
+                raycast_grounded = true;
+                //print("ground hitted");
             }
             else
             {
                 animator.SetBool("Grounded", false);
+                raycast_grounded = false;
                 /*
                                 Vector3 v = (animator.deltaPosition) / Time.deltaTime;
 
@@ -174,6 +184,12 @@ namespace ModalFunctions.Controller
             }
         }
 
+        private void applyScriptGravity()
+        {
+            print("moving");
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 0.1f, transform.position.z), 0.4f);
+        }
+
         private void Move()
         {
             m_horizontal = Input.GetAxis("Horizontal");
@@ -192,6 +208,11 @@ namespace ModalFunctions.Controller
             grounded = animator.GetCurrentAnimatorStateInfo(0).IsName("Motion");
             jump = Input.GetButtonDown("Jump");
             inFirePose = animator.GetCurrentAnimatorStateInfo(0).IsName("FirePose");
+
+            if (gravityByScript && !raycast_grounded && !canGoInAir)
+            {
+                applyScriptGravity();   
+            }
 
             if (grounded)
             {

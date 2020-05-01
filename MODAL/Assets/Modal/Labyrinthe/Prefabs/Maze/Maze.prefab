@@ -46,8 +46,8 @@ MonoBehaviour:
   size:
     x: 10
     z: 10
-  cellPrefab: {fileID: 3364783156704436939, guid: 7e5dfc93e52b13543a1ac8099d4fcb21,
-    type: 3}
+  cellPrefabs:
+  - {fileID: 3364783156704436939, guid: 7e5dfc93e52b13543a1ac8099d4fcb21, type: 3}
   mazeScaleXZ: 40
   mazeScaleY: 20
   passagePrefab: {fileID: 2367078924702119372, guid: 321a1678420c82342885f3870c5565b7,
