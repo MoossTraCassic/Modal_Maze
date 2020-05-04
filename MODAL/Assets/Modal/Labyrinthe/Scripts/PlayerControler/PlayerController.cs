@@ -25,6 +25,8 @@ namespace ModalFunctions.Controller
         private Animator animator;
         private new Rigidbody rigidbody;
         private float speedFactor = 0.5f;
+        [Range(1f, 10f)] [SerializeField] 
+        float m_GravityMultiplier = 4f;
 
         private float m_horizontal;
         private float m_vertical;
@@ -32,13 +34,13 @@ namespace ModalFunctions.Controller
         private float m_fire;
 
         private bool fired = false;
-        private bool running = false;
-        private bool stopRunning = false;
+        //private bool running = false;
+        //private bool stopRunning = false;
         private bool grounded = true;
         private bool raycast_grounded = true;
         private bool jump = false;
         private bool inFirePose = false;
-        private bool gravityByScript = false;
+        //private bool gravityByScript = false;
          
         
         /*void Awake()
@@ -51,17 +53,36 @@ namespace ModalFunctions.Controller
         {
             animator = GetComponent<Animator>();
             rigidbody = GetComponent<Rigidbody>();
+            /*
             if (rigidbody.isKinematic)
             {
                 gravityByScript = true;
                 //print(gravityByScript);
             }
+            */
         }
 
         void Update()
         {
             Move();
         }
+        /*
+        public void OnAnimatorMove()
+        {
+            // we implement this function to override the default root motion.
+            // this allows us to modify the positional speed before it's applied.
+            if (grounded && Time.deltaTime > 0)
+            {
+                Vector3 v = (animator.deltaPosition * 1f) / Time.deltaTime;
+
+                // we preserve the existing y part of the current velocity.
+                v.x = rigidbody.velocity.x;
+                v.z = rigidbody.velocity.z;
+
+                rigidbody.velocity = v;
+            }
+        }
+        */
 
         private void GroundMovement()
         {
@@ -114,6 +135,11 @@ namespace ModalFunctions.Controller
             else
             {
                 rigidbody.AddForce(Vector3.up * JumpForce);
+
+                // rigidbody.velocity = new Vector3(rigidbody.velocity.x, JumpForce, rigidbody.velocity.z);
+				// m_IsGrounded = false;
+				// animator.applyRootMotion = false;
+
                 animator.SetTrigger("Jump");
             }
         }
@@ -150,13 +176,24 @@ namespace ModalFunctions.Controller
             if (Physics.Raycast(transform.position + (Vector3.up * 0.5f), Vector3.down, groundDistance, ground))
             {
                 animator.SetBool("Grounded", true);
-                raycast_grounded = true;
-                //print("ground hitted");
+                // animator.applyRootMotion = true;  //
+                // raycast_grounded = true;
+                // print("ground hitted");
             }
             else
             {
                 animator.SetBool("Grounded", false);
-                raycast_grounded = false;
+                // apply extra gravity from multiplier:
+                if (!canGoInAir)
+                {
+                    // animator.applyRootMotion = false;   //
+                    
+                    Vector3 extraGravityForce = (Physics.gravity * m_GravityMultiplier) - Physics.gravity;
+                    rigidbody.AddForce(extraGravityForce);
+
+                }
+
+                //raycast_grounded = false;
                 /*
                                 Vector3 v = (animator.deltaPosition) / Time.deltaTime;
 
@@ -183,12 +220,13 @@ namespace ModalFunctions.Controller
                 //speedFactor = speedFactor > 0.5f ? speedFactor -= 0.05f : speedFactor = 0.5f;
             }
         }
-
+        /*
         private void applyScriptGravity()
         {
             print("moving");
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 0.1f, transform.position.z), 0.4f);
         }
+        */
 
         private void Move()
         {
@@ -208,12 +246,12 @@ namespace ModalFunctions.Controller
             grounded = animator.GetCurrentAnimatorStateInfo(0).IsName("Motion");
             jump = Input.GetButtonDown("Jump");
             inFirePose = animator.GetCurrentAnimatorStateInfo(0).IsName("FirePose");
-
+            /*
             if (gravityByScript && !raycast_grounded && !canGoInAir)
             {
                 applyScriptGravity();   
             }
-
+            */
             if (grounded)
             {
                 GroundMovement();
@@ -226,7 +264,7 @@ namespace ModalFunctions.Controller
             if (jump && animator.GetBool("Observe") && !timeManager.TimePassed())
             {
                 timeManager.ResetTimePassed();
-                FallFromObserveState(800f);
+                FallFromObserveState(500f);
             }
             if (timeManager.TimePassed())
             {
