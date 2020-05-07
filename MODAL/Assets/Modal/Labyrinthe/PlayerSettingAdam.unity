@@ -7560,7 +7560,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232056954}
-  m_LocalRotation: {x: 0.022253035, y: 0.23684612, z: -0.005430691, w: 0.9712771}
+  m_LocalRotation: {x: 0.022253158, y: 0.23684612, z: -0.0054307217, w: 0.9712771}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8129,7 +8129,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1962360821}
-  m_LocalRotation: {x: 0.039848797, y: 0.23670828, z: -0.009711599, w: 0.9707147}
+  m_LocalRotation: {x: 0.03984879, y: 0.23670828, z: -0.009711597, w: 0.9707147}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8422,6 +8422,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: '@GrenadierIdle'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363354670140774982, guid: 34732acc5b91e8a45a421f5ce10b4552,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6363354670141261414, guid: 34732acc5b91e8a45a421f5ce10b4552,
         type: 3}

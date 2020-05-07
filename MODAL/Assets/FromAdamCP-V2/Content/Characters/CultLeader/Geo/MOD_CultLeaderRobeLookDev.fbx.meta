@@ -1,0 +1,180 @@
+fileFormatVersion: 2
+guid: e9a4654d689d1bd4181908d9e27bc3c7
+timeCreated: 1502995522
+licenseType: Store
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: RobeHood
+    100004: RobeMain
+    100006: UpdatedWithFRINGEandBELT_fray0100
+    100008: UpdatedWithFRINGEandBELT_fray0101
+    100010: UpdatedWithFRINGEandBELT_fray0102
+    100012: UpdatedWithFRINGEandBELT_fray0103
+    100014: UpdatedWithFRINGEandBELT_fray295
+    100016: UpdatedWithFRINGEandBELT_fray0104
+    100018: UpdatedWithFRINGEandBELT_fray0105
+    100020: UpdatedWithFRINGEandBELT_fray0106
+    100022: UpdatedWithFRINGEandBELT_fray0107
+    100024: UpdatedWithFRINGEandBELT_fray296
+    100026: SmartCombine_5
+    100028: UpdatedWithFRINGEandBELT_PRO_belt
+    100030: UpdatedWithFRINGEandBELT_PRO_Cowl
+    100032: UpdatedWithFRINGEandBELT_PRO_Cowl_fraydriver
+    100034: UpdatedWithFRINGEandBELT_PRO_main
+    400000: //RootNode
+    400002: RobeHood
+    400004: RobeMain
+    400006: UpdatedWithFRINGEandBELT_fray0100
+    400008: UpdatedWithFRINGEandBELT_fray0101
+    400010: UpdatedWithFRINGEandBELT_fray0102
+    400012: UpdatedWithFRINGEandBELT_fray0103
+    400014: UpdatedWithFRINGEandBELT_fray295
+    400016: UpdatedWithFRINGEandBELT_fray0104
+    400018: UpdatedWithFRINGEandBELT_fray0105
+    400020: UpdatedWithFRINGEandBELT_fray0106
+    400022: UpdatedWithFRINGEandBELT_fray0107
+    400024: UpdatedWithFRINGEandBELT_fray296
+    400026: SmartCombine_5
+    400028: UpdatedWithFRINGEandBELT_PRO_belt
+    400030: UpdatedWithFRINGEandBELT_PRO_Cowl
+    400032: UpdatedWithFRINGEandBELT_PRO_Cowl_fraydriver
+    400034: UpdatedWithFRINGEandBELT_PRO_main
+    2300000: RobeHood
+    2300002: RobeMain
+    2300004: UpdatedWithFRINGEandBELT_fray0100
+    2300006: UpdatedWithFRINGEandBELT_fray0101
+    2300008: UpdatedWithFRINGEandBELT_fray0102
+    2300010: UpdatedWithFRINGEandBELT_fray0103
+    2300012: UpdatedWithFRINGEandBELT_fray295
+    2300014: UpdatedWithFRINGEandBELT_fray0104
+    2300016: UpdatedWithFRINGEandBELT_fray0105
+    2300018: UpdatedWithFRINGEandBELT_fray0106
+    2300020: UpdatedWithFRINGEandBELT_fray0107
+    2300022: UpdatedWithFRINGEandBELT_fray296
+    2300024: SmartCombine_5
+    2300026: UpdatedWithFRINGEandBELT_PRO_belt
+    2300028: UpdatedWithFRINGEandBELT_PRO_Cowl
+    2300030: UpdatedWithFRINGEandBELT_PRO_Cowl_fraydriver
+    2300032: UpdatedWithFRINGEandBELT_PRO_main
+    3300000: RobeHood
+    3300002: RobeMain
+    3300004: UpdatedWithFRINGEandBELT_fray0100
+    3300006: UpdatedWithFRINGEandBELT_fray0101
+    3300008: UpdatedWithFRINGEandBELT_fray0102
+    3300010: UpdatedWithFRINGEandBELT_fray0103
+    3300012: UpdatedWithFRINGEandBELT_fray295
+    3300014: UpdatedWithFRINGEandBELT_fray0104
+    3300016: UpdatedWithFRINGEandBELT_fray0105
+    3300018: UpdatedWithFRINGEandBELT_fray0106
+    3300020: UpdatedWithFRINGEandBELT_fray0107
+    3300022: UpdatedWithFRINGEandBELT_fray296
+    3300024: SmartCombine_5
+    3300026: UpdatedWithFRINGEandBELT_PRO_belt
+    3300028: UpdatedWithFRINGEandBELT_PRO_Cowl
+    3300030: UpdatedWithFRINGEandBELT_PRO_Cowl_fraydriver
+    3300032: UpdatedWithFRINGEandBELT_PRO_main
+    4300000: RobeMain
+    4300002: RobeHood
+    4300004: UpdatedWithFRINGEandBELT_fray0100
+    4300006: UpdatedWithFRINGEandBELT_fray0101
+    4300008: UpdatedWithFRINGEandBELT_fray295
+    4300010: UpdatedWithFRINGEandBELT_fray0102
+    4300012: UpdatedWithFRINGEandBELT_fray0103
+    4300014: UpdatedWithFRINGEandBELT_fray0104
+    4300016: UpdatedWithFRINGEandBELT_fray0105
+    4300018: UpdatedWithFRINGEandBELT_fray0106
+    4300020: UpdatedWithFRINGEandBELT_fray296
+    4300022: UpdatedWithFRINGEandBELT_fray0107
+    4300024: UpdatedWithFRINGEandBELT_PRO_Cowl
+    4300026: UpdatedWithFRINGEandBELT_PRO_main
+    4300028: UpdatedWithFRINGEandBELT_PRO_belt
+    4300030: UpdatedWithFRINGEandBELT_PRO_Cowl_fraydriver
+    4300032: SmartCombine_5
+    9500000: //RootNode
+    11400000: SmartCombine_5
+    11400002: UpdatedWithFRINGEandBELT_PRO_Cowl
+    11400004: UpdatedWithFRINGEandBELT_PRO_main
+    11400006: UpdatedWithFRINGEandBELT_PRO_belt
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties:
+    - FocalLength
+    - FilmWidth
+    - FilmHeight
+    - NearPlane
+    - FarPlane
+    - CameraProjectionType
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

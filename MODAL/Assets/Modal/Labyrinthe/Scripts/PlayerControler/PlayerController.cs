@@ -8,7 +8,7 @@ namespace ModalFunctions.Controller
 {
     public class PlayerController : MonoBehaviour
     {
-        // public static PlayerController instance;
+        public static PlayerController instance;
         // public delegate bool EmptyHandle();
         // public event EmptyHandle ObserveTimeOver;
 
@@ -43,10 +43,11 @@ namespace ModalFunctions.Controller
         //private bool gravityByScript = false;
          
         
-        /*void Awake()
+        void Awake()
         {
+            print("Player Founded");
             instance = this;
-        }*/
+        }
         
         // Start is called before the first frame update
         void Start()
