@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Modal/Labyrinthe/TitleScreen.unity
     guid: 4c6c5166a3e967040a5cb9ea190d6fae
-  - enabled: 1
+  - enabled: 0
     path: Assets/Modal/Labyrinthe/MazeGenerate.unity
     guid: 8b0e0369fefdc9542b540fb882a9a7f7
+  - enabled: 1
+    path: Assets/Modal/Labyrinthe/ScenesToBuild/LevelEasy.unity
+    guid: 06a30b760120dc246a58ac8e55021229
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: afb1c9c02cbcb1a4eaa59d222c9e05ce,
       type: 2}

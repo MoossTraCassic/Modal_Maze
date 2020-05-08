@@ -59,6 +59,7 @@ namespace ModalFunctions.PNJ
             m_LoadedProjectile.transform.SetParent(transform, false);
             m_LoadedProjectile.transform.localPosition = muzzleOffset;
             m_LoadedProjectile.transform.localRotation = Quaternion.identity;
+            m_LoadedProjectile.transform.localScale = new Vector3(1,1,1);
 
             //*
             m_ProjectilePool.Free(m_LoadedProjectile);

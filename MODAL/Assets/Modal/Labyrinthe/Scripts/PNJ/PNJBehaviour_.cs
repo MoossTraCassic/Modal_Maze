@@ -49,7 +49,7 @@ namespace ModalFunctions.PNJ
 
         //public bool shieldUp { get { return shield.activeSelf; } }
 
-        public PlayerControllerTest target { get { return m_Target; } }
+        public PlayerController target { get { return m_Target; } }
         public Damageable damageable { get { return m_Damageable; } }
 
         /*
@@ -61,7 +61,7 @@ namespace ModalFunctions.PNJ
         public RandomAudioPlayer punchAudioPlayer;
         */
 
-        protected PlayerControllerTest m_Target;
+        protected PlayerController m_Target;
         //used to store the position of the target when the Grenadier decide to shoot, so if the player
         //move between the start of the animation and the actual grenade launch, it shoot were it was not where it is now
         protected Vector3 m_GrenadeTarget;
@@ -72,19 +72,13 @@ namespace ModalFunctions.PNJ
 
         // protected float m_ShieldActivationTime;
 
-        //Test
-        public PlayerControllerTest test;
-        private void Awake()
-        {
-            m_Target = test;
-        }
 
         void OnEnable()
         {
             m_EnemyController = GetComponent<PNJController>();
             m_NavMeshAgent = GetComponent<NavMeshAgent>();
 
-            SceneLinkedSMB<PlayerControllerTest>.Initialise(m_EnemyController.animator, test);
+            SceneLinkedSMB<PNJBehaviour_>.Initialise(m_EnemyController.animator, this);
             /*
             fistWeapon.SetOwner(gameObject);
             fistWeapon.EndAttack();

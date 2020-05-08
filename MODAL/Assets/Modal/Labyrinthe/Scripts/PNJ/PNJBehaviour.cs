@@ -56,7 +56,7 @@ namespace ModalFunctions.PNJ
 
         // public bool shieldUp { get { return shield.activeSelf; } }
 
-        public PlayerControllerTest target { get { return m_Target; } }
+        public PlayerController target { get { return m_Target; } }
         public Damageable damageable { get { return m_Damageable; } }
 
         
@@ -69,7 +69,7 @@ namespace ModalFunctions.PNJ
 
         
 
-        protected PlayerControllerTest m_Target;
+        protected PlayerController m_Target;
         //used to store the position of the target when the TraptionGuard decide to shoot, so if the player
         //move between the start of the animation and the actual grenade launch, it shoot were it was not where it is now
         protected Vector3 m_AmmoTarget;
@@ -88,8 +88,6 @@ namespace ModalFunctions.PNJ
         protected float m_TimerSinceLostTarget = 0.0f;
         protected TargetDistributor.TargetFollower m_FollowerInstance = null;
 
-        //Test
-        public PlayerControllerTest test;
         
 
         void OnEnable()
@@ -155,11 +153,12 @@ namespace ModalFunctions.PNJ
 
         public void FindTarget()
         {
-            //m_Target = playerScanner.Detect(transform);
+            m_Target = playerScanner.Detect(transform);
             
+	    
             // From Chomper
             //we ignore height difference if the target was already seen
-            PlayerControllerTest target = playerScanner.Detect(transform);
+            /*PlayerControllerTest target = playerScanner.Detect(transform);
 
             if (m_Target == null)
             {
@@ -211,7 +210,7 @@ namespace ModalFunctions.PNJ
 
                     m_TimerSinceLostTarget = 0.0f;
                 }
-            }
+            }*/
         
         }
 
@@ -328,7 +327,7 @@ namespace ModalFunctions.PNJ
             //the bullet is launched a couple of meters in "front" of the player, because it bounce and roll, to make it a bit ahrder for the player
             //to avoid it
             //**Vector3 target = transform.position + (toTarget - toTarget * 0.1f);
-            Vector3 target = transform.position + (toTarget + toTarget * 0.1f);
+            Vector3 target = transform.position + (toTarget + Vector3.up * 0.1f);
 
             rifle.Attack(target);
         }

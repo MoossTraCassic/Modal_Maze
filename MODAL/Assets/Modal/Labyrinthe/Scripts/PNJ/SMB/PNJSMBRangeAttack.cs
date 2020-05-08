@@ -6,9 +6,9 @@ namespace ModalFunctions.PNJ
 {
     public class PNJSMBRangeAttack : SceneLinkedSMB<PNJBehaviour>
     {
-        public float growthTime = 2.0f;
+        // public float growthTime = 2.0f;
 
-        protected float m_GrowthTimer = 0;
+        // protected float m_GrowthTimer = 0;
 
         public override void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -28,11 +28,11 @@ namespace ModalFunctions.PNJ
         {
             base.OnSLStateNoTransitionUpdate(animator, stateInfo, layerIndex);
             /*
-            m_GrowthTimer = Mathf.Clamp(m_GrowthTimer + Time.deltaTime, 0.0f, growthTime);
+            // m_GrowthTimer = Mathf.Clamp(m_GrowthTimer + Time.deltaTime, 0.0f, growthTime);
             
-            if (m_MonoBehaviour.rifle.loadedProjectile != null)
-            m_MonoBehaviour.rifle.loadedProjectile.transform.localScale =
-                Vector3.one * (m_GrowthTimer / growthTime);     // !!! Attention
+            // if (m_MonoBehaviour.rifle.loadedProjectile != null)
+            // m_MonoBehaviour.rifle.loadedProjectile.transform.localScale =
+                // Vector3.one * (m_GrowthTimer / growthTime);     // !!! Attention
             */
         }
     }

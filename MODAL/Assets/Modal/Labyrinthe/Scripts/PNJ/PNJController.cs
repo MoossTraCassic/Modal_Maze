@@ -58,6 +58,7 @@ namespace ModalFunctions.PNJ
 
             if (m_UnderExternalForce)
                 ForceMovement();
+
         }
 
         void CheckGrounded()
@@ -82,7 +83,7 @@ namespace ModalFunctions.PNJ
 
             m_NavMeshAgent.Warp(m_Rigidbody.position);
         }
-
+	/*
         private void OnAnimatorMove()
         {
             if (m_UnderExternalForce)
@@ -108,7 +109,7 @@ namespace ModalFunctions.PNJ
                 transform.forward = m_Animator.deltaRotation * transform.forward;
             }
         }
-
+    */
         // used to disable position being set by the navmesh agent, for case where we want the animation to move the enemy instead (e.g. Chomper attack)
         public void SetFollowNavmeshAgent(bool follow)
         {

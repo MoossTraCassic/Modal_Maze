@@ -94,13 +94,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8f54a5d3fbca94ba6537ff21a2755f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotType: 2
   projectileSpeed: 50
   damageAmount: 1
   damageMask:
     serializedVersion: 2
     m_Bits: 1024
-  explosionRadius: 0
+  explosionRadius: 0.2
   explosionTimer: 0.01
   explosionVFX: {fileID: 198000012944515248, guid: 9defeac88977c0d448aa4541073ee9e4,
     type: 3}
@@ -119,7 +118,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 32
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!64 &8200583033886080254
 MeshCollider:
   m_ObjectHideFlags: 0

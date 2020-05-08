@@ -30,15 +30,15 @@ namespace ModalFunctions.PNJ
         /// <param name="detector">The transform from which run the detection</param>
         /// /// <param name="useHeightDifference">If the computation should comapre the height difference to the maxHeightDifference value or ignore</param>
         /// <returns>The player controller if visible, null otherwise</returns>
-        public PlayerControllerTest Detect(Transform detector, bool useHeightDifference = true)
+        public PlayerController Detect(Transform detector, bool useHeightDifference = true)
         {
             //if either the player is not spwned or they are spawning, we do not target them
-            if (PlayerControllerTest.instance == null)// || PlayerController.instance.respawning)
+            if (PlayerController.instance == null)// || PlayerController.instance.respawning)
                 return null;
 
             Vector3 eyePos = detector.position + Vector3.up * heightOffset;
-            Vector3 toPlayer = PlayerControllerTest.instance.transform.position - eyePos;
-            Vector3 toPlayerTop = PlayerControllerTest.instance.transform.position + Vector3.up * 1.5f - eyePos;
+            Vector3 toPlayer = PlayerController.instance.transform.position - eyePos;
+            Vector3 toPlayerTop = PlayerController.instance.transform.position + Vector3.up * 1.5f - eyePos;
 
             if (useHeightDifference && Mathf.Abs(toPlayer.y + heightOffset) > maxHeightDifference)
             { //if the target is too high or too low no need to try to reach it, just abandon pursuit
@@ -66,7 +66,7 @@ namespace ModalFunctions.PNJ
                         viewBlockerLayerMask, QueryTriggerInteraction.Ignore);
 
                     if (canSee)
-                        return PlayerControllerTest.instance;
+                        return PlayerController.instance;
                 }
             }
 

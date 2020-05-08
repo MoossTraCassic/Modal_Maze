@@ -21,6 +21,7 @@ namespace ModalFunctions.Controller
         public BulletManager bulletManager;
         public TimeManager timeManager;
         public bool canGoInAir = false;
+	public Animator p_animator {get {return animator;} }
 
         private Animator animator;
         private new Rigidbody rigidbody;
@@ -62,6 +63,7 @@ namespace ModalFunctions.Controller
             }
             */
         }
+
 
         void Update()
         {
@@ -310,6 +312,21 @@ namespace ModalFunctions.Controller
 
                 fired = true;
             }
+        }
+
+        public void Hit()
+        {
+            // if(damageAudioPlayer != null) 
+            //    damageAudioPlayer.PlayRandomClip();
+            animator.SetTrigger("Hurt");
+            // m_CoreMaterial.SetColor("_Color2", Color.red);
+        }
+
+        public void Die()
+        {
+            // if(deathAudioPlayer != null)
+            //     deathAudioPlayer.PlayRandomClip();
+            animator.SetTrigger("Death");
         }
 
     }

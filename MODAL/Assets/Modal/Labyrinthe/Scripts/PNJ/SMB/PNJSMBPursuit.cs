@@ -34,16 +34,16 @@ namespace ModalFunctions.PNJ
             if (m_MonoBehaviour.target != null)
             {
                 // Chomper
-                m_MonoBehaviour.RequestTargetPosition();
+                //**m_MonoBehaviour.RequestTargetPosition();
 
                 
-                //Vector3 targetPos = m_MonoBehaviour.target.transform.position;
+                Vector3 targetPos = m_MonoBehaviour.target.transform.position;
                 
                 Vector3 toTarget = m_MonoBehaviour.target.transform.position - m_MonoBehaviour.transform.position;
                 float distToTarget = toTarget.sqrMagnitude;
 
                 
-                //m_MonoBehaviour.controller.SetTarget(targetPos);
+                m_MonoBehaviour.controller.SetTarget(targetPos);
 
                 /*
                 if (distToTarget <= m_MonoBehaviour.meleeRange * m_MonoBehaviour.meleeRange)
@@ -61,7 +61,7 @@ namespace ModalFunctions.PNJ
                     animator.SetTrigger(PNJBehaviour.hashRangeAttack);
                     animator.SetBool(PNJBehaviour.hashInPursuitParam, false);   //TODO: Try with deselected
                 }
-                else if (m_MonoBehaviour.followerData.assignedSlot != -1)
+                /*else if (m_MonoBehaviour.followerData.assignedSlot != -1)
                 {
                     Vector3 targetPoint = m_MonoBehaviour.target.transform.position +
                         m_MonoBehaviour.followerData.distributor.GetDirection(m_MonoBehaviour.followerData
@@ -72,7 +72,7 @@ namespace ModalFunctions.PNJ
                 else
                 {
                     m_MonoBehaviour.StopPursuit();
-                }
+                }*/
 
             }
             else

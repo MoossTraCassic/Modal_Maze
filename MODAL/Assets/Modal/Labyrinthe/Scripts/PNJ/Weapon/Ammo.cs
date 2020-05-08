@@ -23,7 +23,7 @@ namespace ModalFunctions.PNJ
         public float explosionRadius;    // For Test
         public float explosionTimer = 0.1f;
         public ParticleSystem explosionVFX;
-        [Tooltip("Will the explosion VFX play where the grenade explode or on the closest ground")]
+        //[Tooltip("Will the explosion VFX play where the grenade explode or on the closest ground")]
         // public bool vfxOnGround = false;
 
         // public RandomAudioPlayer explosionPlayer;
@@ -260,7 +260,7 @@ namespace ModalFunctions.PNJ
             velocity = toTarget;
             // velocity.y = 0;
             velocity.Normalize();
-            //velocity.y = 0.1f;   // Was 0.7f
+            velocity.y = 0.05f;   // Was 0.7f
 
             Debug.DrawRay(transform.position, velocity * 3.0f, Color.blue);
 
