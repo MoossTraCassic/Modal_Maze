@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using ModalFunctions.DamageSystem;
 
 namespace ModalFunctions.PNJ
 {
@@ -53,9 +54,11 @@ namespace ModalFunctions.PNJ
                     animator.SetBool(GrenadierBehaviour.hashInPursuitParam, false);
                 }
                 */
+                Damageable damagePlayer = m_MonoBehaviour.target.m_damageable;
 
+                bool attackable = damagePlayer.currentHitPoints > 0;
                 // else if (distToTarget <= m_MonoBehaviour.rangeRange * m_MonoBehaviour.rangeRange)
-                if (distToTarget <= m_MonoBehaviour.rangeRange * m_MonoBehaviour.rangeRange)
+                if (distToTarget <= m_MonoBehaviour.rangeRange * m_MonoBehaviour.rangeRange && attackable)
                 {
                     m_MonoBehaviour.OrientTowardTarget();
                     animator.SetTrigger(PNJBehaviour.hashRangeAttack);

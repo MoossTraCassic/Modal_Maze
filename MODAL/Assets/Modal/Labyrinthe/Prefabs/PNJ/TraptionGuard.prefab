@@ -2400,13 +2400,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerScanner:
     heightOffset: 3
-    detectionRadius: 45
+    detectionRadius: 23
     detectionAngle: 270
     maxHeightDifference: 2.5
     viewBlockerLayerMask:
       serializedVersion: 2
       m_Bits: 4352
-  rangeRange: 30
+  rangeRange: 15
   rifle: {fileID: 1903642854020863382}
   deathAudioPlayer: {fileID: 0}
   damageAudioPlayer: {fileID: 0}
@@ -2427,7 +2427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHitPoints: 3
-  invulnerabiltyTime: 1
+  invulnerabiltyTime: 0.2
   hitAngle: 360
   hitForwardRotation: 360
   OnDeath:
@@ -2477,7 +2477,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.4
+  m_Radius: 0.5
   m_Height: 2.05
   m_Direction: 1
   m_Center: {x: 0, y: 0.95, z: 0}
@@ -5106,14 +5106,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036880049541990820}
-  m_LocalRotation: {x: -0.3006849, y: -0.03976445, z: 0.3032075, w: 0.9033674}
-  m_LocalPosition: {x: -0.12853847, y: -0.15389095, z: -0.058532827}
+  m_LocalRotation: {x: -0.27022892, y: -0.19615467, z: 0.32583022, w: 0.88449675}
+  m_LocalPosition: {x: -0.22755967, y: 0.032879304, z: 0.09043706}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1038315677383739836}
   m_Father: {fileID: 1042314429353713332}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -31.275002, y: -17.301, z: 41.985}
+  m_LocalEulerAnglesHint: {x: -20.500002, y: -33.949, z: 46.764004}
 --- !u!114 &1903642854020863382
 MonoBehaviour:
   m_ObjectHideFlags: 0

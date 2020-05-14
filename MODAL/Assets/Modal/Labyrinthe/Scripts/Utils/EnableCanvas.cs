@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class EnableCanvas : MonoBehaviour
 {
-    public Canvas pointer;
+    //public Canvas pointer;
+	public  GameObject pointer;
 
     private void OnEnable()
     {
-        pointer.enabled = true;
+        pointer.SetActive(true);
     }
 
     private void OnDisable()
     {
-        pointer.enabled = false;
+        pointer.SetActive(false);
     }
 }

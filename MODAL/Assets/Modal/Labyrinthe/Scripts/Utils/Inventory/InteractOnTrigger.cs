@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-/*
+
 namespace ModalFunctions.Utils
 {
     [RequireComponent(typeof(Collider))]
@@ -64,4 +64,3 @@ namespace ModalFunctions.Utils
     }
 
 }
-*/

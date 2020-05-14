@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ModalFunctions.Controller;
+using ModalFunctions.DamageSystem;
 
 namespace ModalFunctions.PNJ
 {
@@ -43,7 +44,10 @@ namespace ModalFunctions.PNJ
                 }
                 */
                 // else if (toTarget.sqrMagnitude < m_MonoBehaviour.rangeRange * m_MonoBehaviour.rangeRange)
-                if (toTarget.sqrMagnitude < m_MonoBehaviour.rangeRange * m_MonoBehaviour.rangeRange)
+                Damageable damagePlayer = m_MonoBehaviour.target.m_damageable;
+
+                bool attackable = damagePlayer.currentHitPoints > 0;
+                if (toTarget.sqrMagnitude < m_MonoBehaviour.rangeRange * m_MonoBehaviour.rangeRange && attackable)
                 {
                     if (m_MonoBehaviour.OrientTowardTarget() != PNJBehaviour.OrientationState.IN_TRANSITION)
                     {

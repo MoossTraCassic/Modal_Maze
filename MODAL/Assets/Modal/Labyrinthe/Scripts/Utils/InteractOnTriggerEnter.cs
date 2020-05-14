@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,7 +10,7 @@ namespace ModalFunctions.Utils
     public class InteractOnTriggerEnter : MonoBehaviour
     {
         public LayerMask layers;
-        public UnityEvent OnEnter, OnExit;
+        //public UnityEvent OnEnter, OnExit;
         new Collider collider;
         //**public InventoryController.InventoryChecker[] inventoryChecks;
 
@@ -31,7 +31,7 @@ namespace ModalFunctions.Utils
 
         protected virtual void ExecuteOnEnter(Collider other)
         {
-            OnEnter.Invoke();
+            //OnEnter.Invoke();
             /*for (var i = 0; i < inventoryChecks.Length; i++)
             {
                 inventoryChecks[i].CheckInventory(other.GetComponentInChildren<InventoryController>());
@@ -48,11 +48,13 @@ namespace ModalFunctions.Utils
 
         protected virtual void ExecuteOnExit(Collider other)
         {
-            OnExit.Invoke();
+            //OnExit.Invoke();
             PlayerController.instance.canGoInAir = true;
+
+            Destroy(this.gameObject, 2f);
         }
 
-
+/*
         void OnDrawGizmos()
         {
             Gizmos.DrawIcon(transform.position, "InteractionTrigger", false);
@@ -62,6 +64,6 @@ namespace ModalFunctions.Utils
         {
             //need to inspect events and draw arrows to relevant gameObjects.
         }
-
+*/
     } 
 }

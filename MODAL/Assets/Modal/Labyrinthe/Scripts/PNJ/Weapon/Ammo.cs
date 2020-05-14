@@ -95,6 +95,7 @@ namespace ModalFunctions.PNJ
                 if (m_SinceFired > explosionTimer + 0.5f)
                 {
                     StopFireVFX();
+                    m_SinceFired = 0f;
                 }
             }
         }

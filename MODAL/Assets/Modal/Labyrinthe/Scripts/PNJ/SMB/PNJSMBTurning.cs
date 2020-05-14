@@ -21,15 +21,22 @@ namespace ModalFunctions.PNJ
             base.OnSLStateNoTransitionUpdate(animator, stateInfo, layerIndex);
 	    if(m_MonoBehaviour.target == null) return;
 
-            Vector3 v = m_MonoBehaviour.target.transform.position - m_MonoBehaviour.transform.position;
-            v.y = 0;
+        Vector3 v = m_MonoBehaviour.transform.position - m_MonoBehaviour.target.transform.position;
+        v.y = 0;
 
-            float angle = Vector3.SignedAngle(originalForward, v, Vector3.up);
+        float angle = Vector3.SignedAngle(originalForward, v, Vector3.up);
 
-            animator.SetFloat(PNJBehaviour.hashTurnAngleParam, angle / 180.0f);
-	    if(angle <= 2f){ animator.SetTrigger(PNJBehaviour.hashSpotted); Debug.Log("0");}
-	    // Vector3 newForward = new Vector3(originalForward.x + angle,0f,originalForward.z + angle);
-	    // m_MonoBehaviour.transform.forward = Vector3.Lerp(originalForward,newForward,Mathf.Abs(angle));
+	    /*if(Mathf.Abs(angle) <= 20.0f)
+        { 
+            //animator.SetTrigger(PNJBehaviour.hashSpotted); Debug.Log("0");
+            m_MonoBehaviour.transform.forward = v.normalized;
+        }*/
+        
+        {
+        animator.SetFloat(PNJBehaviour.hashTurnAngleParam, angle / 180.0f);
+        }
+	    Vector3 newForward = new Vector3(originalForward.x + angle,0f,originalForward.z + angle);
+	    m_MonoBehaviour.transform.forward = Vector3.Lerp(originalForward,newForward,Mathf.Abs(angle));
         }
 
         public override void OnSLStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

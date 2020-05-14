@@ -6,6 +6,9 @@ namespace ModalFunctions.Utils
 {
     public class TimeManager : MonoBehaviour
     {
+        public static TimeManager Instance { get { return s_instance; } }
+        protected static TimeManager s_instance;
+
         public float slowDownFactor = 0.05f;
         public float slowDownLength = 2f;
 
@@ -14,6 +17,8 @@ namespace ModalFunctions.Utils
         private float oneSecond = 1f;
         private bool timePassed = false;
         private IEnumerator timeCount;
+
+        private float m_initialFixeddeltaTime;
         /*
         void Update()
         {
@@ -44,6 +49,11 @@ namespace ModalFunctions.Utils
             
         } 
         */
+        private void Awake()
+        {
+            s_instance = this;
+        }
+
         public void PassTime(float secondsToReach)
         {
             if(timeCount != null)
@@ -57,6 +67,7 @@ namespace ModalFunctions.Utils
         }
         public void DoSlowDown()
         {
+            m_initialFixeddeltaTime = Time.fixedDeltaTime;
             //slowMotion = true;
             Time.timeScale = slowDownFactor;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
@@ -69,9 +80,13 @@ namespace ModalFunctions.Utils
             while(Time.timeScale < 1f)
             {
                 Time.timeScale += (1f / slowDownLength) * Time.unscaledDeltaTime;
+                Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
                 yield return null;
             }
-            Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
+            Time.timeScale = 1f;
+            Time.fixedDeltaTime = m_initialFixeddeltaTime;
+            Debug.Log("Slow Mo Done");
+            
         }
 
         public void UnDoSlowMotion()

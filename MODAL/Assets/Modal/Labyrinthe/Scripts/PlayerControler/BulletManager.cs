@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using UnityEngine;
 
 namespace ModalFunctions.Utils
@@ -15,6 +16,7 @@ namespace ModalFunctions.Utils
         public Transform center;
 
         public float waitTime = 10f;
+        public float moveAngle = 45f;
 
         public Transform handPosition;
 
@@ -53,7 +55,7 @@ namespace ModalFunctions.Utils
             {
                 PrepareBullet();
 
-                if(joined && PlayerHasFired())
+                if(joined && PlayerHasFired() && OrbeInCone())
                 {
                     MoveBullet();
                 }
@@ -141,8 +143,9 @@ namespace ModalFunctions.Utils
                 {
                     bullet.SetShooted();
                     //bullet.transform.position += bullet.transform.forward * bulletSpeed * Time.deltaTime;
-                    Vector3 bulletDirection = rayOrigin.transform.forward + 0.15f * rayOrigin.transform.up; 
-                    bullet.GetRigidBody().AddForce(bulletDirection * bulletSpeed);
+                    Vector3 bulletDirection = rayOrigin.transform.forward + 0.1f * rayOrigin.transform.up; 
+                    //bullet.GetRigidBody().AddForce(bulletDirection * bulletSpeed);
+                    bullet.GetRigidBody().velocity = bulletDirection * bulletSpeed;
                     bullet.EnableGravity();
                     DestroyCurrentOrbe();
                 }
@@ -155,6 +158,16 @@ namespace ModalFunctions.Utils
             activeBullet--;
             Destroy(currentOrbe, 3f);
             //activeBullet--;
+        }
+
+        bool OrbeInCone()
+        {
+            Vector3 v = rayOrigin.position - center.position;
+            v.y = 0;
+
+            float angle = Vector3.Angle(center.forward, v);
+
+            return angle <= moveAngle ? true : false;
         }
 
         bool PlayerIsInFireMode()

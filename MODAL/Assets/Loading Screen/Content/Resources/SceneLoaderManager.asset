@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7decf71d60cb2fe438b4d9a0a160a517, type: 3}
+  m_Name: SceneLoaderManager
+  m_EditorClassIdentifier: 
+  List:
+    array:
+    - SceneName: LoadExample
+      DisplayName: This Example Name
+      Description: Prompta noluisse verterem sed eu, mundi graece eum in. Vis ut
+        alia euismod tincidunt, per no ubique euismod. Indoctum qualisque vituperata
+        an his. Timeam feugait id mel, vis in iuvaret fabulas. Quis veri diceret
+        vix in, numquam praesent elaboraret eum ne.
+      SkipType: 0
+      LoadingType: 0
+      FakeLoadingTime: 10
+      Backgrounds:
+      - {fileID: 21300000, guid: 2650407d6311724489f3256696e75bb0, type: 3}
+      - {fileID: 21300000, guid: af238b260179c884b93aa3248768f90b, type: 3}
+      - {fileID: 21300000, guid: d693da8ebc165674b9509bab6391e358, type: 3}
+    - SceneName: GameIntro
+      DisplayName: Itroduction
+      Description: 
+      SkipType: 0
+      LoadingType: 0
+      FakeLoadingTime: 10
+      Backgrounds:
+      - {fileID: 21300000, guid: 2650407d6311724489f3256696e75bb0, type: 3}
+      - {fileID: 21300000, guid: af238b260179c884b93aa3248768f90b, type: 3}
+      - {fileID: 21300000, guid: d693da8ebc165674b9509bab6391e358, type: 3}
+    - SceneName: TitleScreen
+      DisplayName: 
+      Description: 
+      SkipType: 2
+      LoadingType: 0
+      FakeLoadingTime: 10.8
+      Backgrounds:
+      - {fileID: 21300000, guid: 2650407d6311724489f3256696e75bb0, type: 3}
+      - {fileID: 21300000, guid: af238b260179c884b93aa3248768f90b, type: 3}
+      - {fileID: 21300000, guid: d693da8ebc165674b9509bab6391e358, type: 3}
+    - SceneName: StoryScene
+      DisplayName: Here is a Litle Story
+      Description: '"De-struc-tion!" A non-human voice said. To me, the robots seemed
+        like Deleks in Doctor Who! who said "EXTERMINATE!" I turned around and shoved
+        the Power Destabilizer or whatever it''s called right through its chest.
+        It immediately shut down Skylar''s door in our not safe house. She was fighting
+        off at least fifty Robots...at once.
+
+
+        CLAIRE''s POV'
+      SkipType: 1
+      LoadingType: 0
+      FakeLoadingTime: 10
+      Backgrounds:
+      - {fileID: 21300000, guid: af238b260179c884b93aa3248768f90b, type: 3}
+      - {fileID: 21300000, guid: 2650407d6311724489f3256696e75bb0, type: 3}
+      - {fileID: 21300000, guid: d693da8ebc165674b9509bab6391e358, type: 3}
+    - SceneName: LevelEasy
+      DisplayName: Second
+      Description: 
+      SkipType: 1
+      LoadingType: 0
+      FakeLoadingTime: 10
+      Backgrounds:
+      - {fileID: 21300000, guid: 2650407d6311724489f3256696e75bb0, type: 3}
+      - {fileID: 21300000, guid: af238b260179c884b93aa3248768f90b, type: 3}
+      - {fileID: 21300000, guid: d693da8ebc165674b9509bab6391e358, type: 3}
+    - SceneName: LevelMedium
+      DisplayName: Second
+      Description: 'We''re Progressing I know this this place !!
+
+'
+      SkipType: 1
+      LoadingType: 0
+      FakeLoadingTime: 10
+      Backgrounds:
+      - {fileID: 21300000, guid: 2650407d6311724489f3256696e75bb0, type: 3}
+      - {fileID: 21300000, guid: af238b260179c884b93aa3248768f90b, type: 3}
+      - {fileID: 21300000, guid: d693da8ebc165674b9509bab6391e358, type: 3}
+    - SceneName: LevelHard
+      DisplayName: Last
+      Description: Finally Remember just at the bottom of this Maze, Is my beloved
+        City
+      SkipType: 1
+      LoadingType: 0
+      FakeLoadingTime: 10
+      Backgrounds:
+      - {fileID: 21300000, guid: 2650407d6311724489f3256696e75bb0, type: 3}
+      - {fileID: 21300000, guid: af238b260179c884b93aa3248768f90b, type: 3}
+      - {fileID: 21300000, guid: d693da8ebc165674b9509bab6391e358, type: 3}
+    - SceneName: EndingScene
+      DisplayName: Finally
+      Description: Were Getting at the end of this fool
+      SkipType: 1
+      LoadingType: 0
+      FakeLoadingTime: 10
+      Backgrounds:
+      - {fileID: 21300000, guid: 2650407d6311724489f3256696e75bb0, type: 3}
+      - {fileID: 21300000, guid: af238b260179c884b93aa3248768f90b, type: 3}
+      - {fileID: 21300000, guid: d693da8ebc165674b9509bab6391e358, type: 3}
+  TipList:
+    array:
+    - Explore the World to discover all the possibilities
+    - Adopt your own Strategy to figure out situations
+    - Remember Items Could be use in different ways
+    - Blue Items make you use your ability to float
+    - Red Items can only be Use at certain places to teleport
+    - A good strategy increases your chances, Be patient
+    - Green Items makes you deform Time

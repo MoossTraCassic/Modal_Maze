@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ModalFunctions.Utils;
+using ModalFunctions.DamageSystem;
 
 
 namespace ModalFunctions.Controller
@@ -20,13 +21,26 @@ namespace ModalFunctions.Controller
         public float JumpForce = 500f;
         public BulletManager bulletManager;
         public TimeManager timeManager;
-        public bool canGoInAir = false;
-	public Animator p_animator {get {return animator;} }
-
+        
+	    public Animator p_animator { get {return animator;} }
+        public bool p_inFirePose { get{return PlayerIsInFireMode();} }
+        public InventoryController Inventory { get { return inventoryController; } }
+        /*public bool CanGoInAir
+        {
+            get { return canGoInAir; }
+            set
+            {
+                canGoInAir = value;
+            }
+        }
+        */
+        public Damageable m_damageable{get;private set;}
+        private PlayerInput m_Input;
+        private InventoryController inventoryController;
         private Animator animator;
         private new Rigidbody rigidbody;
         private float speedFactor = 0.5f;
-        [Range(1f, 10f)] [SerializeField] 
+        [Range(1f, 50f)] [SerializeField] 
         float m_GravityMultiplier = 4f;
 
         private float m_horizontal;
@@ -41,12 +55,17 @@ namespace ModalFunctions.Controller
         private bool raycast_grounded = true;
         private bool jump = false;
         private bool inFirePose = false;
+        private bool m_HasControl = true;
         //private bool gravityByScript = false;
-         
-        
+        [HideInInspector]
+        public bool canGoInAir = false;
+
         void Awake()
         {
-            print("Player Founded");
+            m_Input = GetComponent<PlayerInput>();
+            inventoryController = GetComponent<InventoryController>();
+            m_damageable = GetComponent<Damageable>();
+            //print("Player Founded");
             instance = this;
         }
         
@@ -55,6 +74,7 @@ namespace ModalFunctions.Controller
         {
             animator = GetComponent<Animator>();
             rigidbody = GetComponent<Rigidbody>();
+            
             /*
             if (rigidbody.isKinematic)
             {
@@ -62,6 +82,7 @@ namespace ModalFunctions.Controller
                 //print(gravityByScript);
             }
             */
+            canGoInAir = false;
         }
 
 
@@ -86,6 +107,12 @@ namespace ModalFunctions.Controller
             }
         }
         */
+
+        private bool PlayerIsInFireMode()
+        {
+            return animator.GetCurrentAnimatorStateInfo(0).IsName("FirePose") ||
+                   animator.GetCurrentAnimatorStateInfo(0).IsName("KyleFire");
+        }
 
         private void GroundMovement()
         {
@@ -233,21 +260,23 @@ namespace ModalFunctions.Controller
 
         private void Move()
         {
-            m_horizontal = Input.GetAxis("Horizontal");
-            m_vertical = Input.GetAxis("Vertical");
+            m_HasControl = m_Input.HaveControl();
 
-            m_vertical = Mathf.Clamp(m_vertical * speedFactor, 0f, 1f);
-            m_horizontal = Mathf.Clamp(m_horizontal, -1f, 1f);
+            m_horizontal = m_HasControl ? Input.GetAxis("Horizontal") : 0f;
+            m_vertical = m_HasControl ? Input.GetAxis("Vertical") : 0f;
+
+            m_vertical = m_HasControl ? Mathf.Clamp(m_vertical * speedFactor, 0f, 0.9f) : 0f;
+            m_horizontal = m_HasControl ? Mathf.Clamp(m_horizontal, -0.85f, 0.85f) : 0f;
 
             animator.SetFloat("WalkSpeed", m_vertical, 0.4f, Time.deltaTime);
-            animator.SetFloat("TurnSpeed", m_horizontal, 0.2f, Time.deltaTime);
+            animator.SetFloat("TurnSpeed", m_horizontal, 0.4f, Time.deltaTime);
 
 
-            m_goFire = Input.GetAxis("Axis_9");
-            m_fire = Input.GetAxis("Axis_10");
+            m_goFire = m_HasControl ? Input.GetAxis("Axis_9") : 0f;
+            m_fire = m_HasControl ? Input.GetAxis("Axis_10") : 0f;
 
             grounded = animator.GetCurrentAnimatorStateInfo(0).IsName("Motion");
-            jump = Input.GetButtonDown("Jump");
+            jump = Input.GetButtonDown("Jump") && m_HasControl ;
             inFirePose = animator.GetCurrentAnimatorStateInfo(0).IsName("FirePose");
             /*
             if (gravityByScript && !raycast_grounded && !canGoInAir)
