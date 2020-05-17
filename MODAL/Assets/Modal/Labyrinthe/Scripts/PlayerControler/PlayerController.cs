@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ModalFunctions.Utils;
@@ -34,19 +34,23 @@ namespace ModalFunctions.Controller
             }
         }
         */
+        [HideInInspector]
+        public bool p_jump;
         public Damageable m_damageable{get;private set;}
         private PlayerInput m_Input;
         private InventoryController inventoryController;
         private Animator animator;
         private new Rigidbody rigidbody;
         private float speedFactor = 0.5f;
-        [Range(1f, 50f)] [SerializeField] 
+        [Range(1f, 500f)] [SerializeField] 
         float m_GravityMultiplier = 4f;
 
         private float m_horizontal;
         private float m_vertical;
         private float m_goFire;
         private float m_fire;
+        private Vector3 m_cameraForward;
+        private Vector3 m_desiredDirection;
 
         private bool fired = false;
         //private bool running = false;
@@ -257,6 +261,15 @@ namespace ModalFunctions.Controller
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 0.1f, transform.position.z), 0.4f);
         }
         */
+        [Range(0f,1f)]
+        public float m_damp = 0.4f;
+
+        public float m_angle = 180f;
+
+        /*void GetOrientation(float X, float Y)
+        {
+
+        }*/
 
         private void Move()
         {
@@ -265,18 +278,32 @@ namespace ModalFunctions.Controller
             m_horizontal = m_HasControl ? Input.GetAxis("Horizontal") : 0f;
             m_vertical = m_HasControl ? Input.GetAxis("Vertical") : 0f;
 
-            m_vertical = m_HasControl ? Mathf.Clamp(m_vertical * speedFactor, 0f, 0.9f) : 0f;
-            m_horizontal = m_HasControl ? Mathf.Clamp(m_horizontal, -0.85f, 0.85f) : 0f;
+            m_vertical = m_HasControl ? Mathf.Clamp(m_vertical * speedFactor, 0f, 1f) : 0f;
+            m_horizontal = m_HasControl ? Mathf.Clamp(m_horizontal, -1f, 1f) : 0f;
 
-            animator.SetFloat("WalkSpeed", m_vertical, 0.4f, Time.deltaTime);
-            animator.SetFloat("TurnSpeed", m_horizontal, 0.4f, Time.deltaTime);
+            //*
+            m_cameraForward = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;  
 
+
+            m_desiredDirection = m_vertical * m_cameraForward + m_horizontal * Camera.main.transform.right.normalized;
+            float direction = Vector3.Angle(transform.forward, m_desiredDirection) * Mathf.Sign(Vector3.Dot(m_desiredDirection, transform.right))/m_angle;
+
+            //float direction = Mathf.Atan2(m_horizontal, m_vertical) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
+
+            float speed = m_vertical < 0.1f ? m_vertical : m_desiredDirection.magnitude;
+
+            animator.SetFloat("WalkSpeed", speed, 0.4f, Time.deltaTime);
+            animator.SetFloat("TurnSpeed", direction, m_damp, Time.deltaTime);
+
+            //*
+            //**animator.SetFloat("WalkSpeed", m_vertical, 0.4f, Time.deltaTime);
+            //**animator.SetFloat("TurnSpeed", m_horizontal, m_damp, Time.deltaTime);
 
             m_goFire = m_HasControl ? Input.GetAxis("Axis_9") : 0f;
             m_fire = m_HasControl ? Input.GetAxis("Axis_10") : 0f;
 
             grounded = animator.GetCurrentAnimatorStateInfo(0).IsName("Motion");
-            jump = Input.GetButtonDown("Jump") && m_HasControl ;
+            jump = (Input.GetButtonDown("Jump") || p_jump) && m_HasControl ;
             inFirePose = animator.GetCurrentAnimatorStateInfo(0).IsName("FirePose");
             /*
             if (gravityByScript && !raycast_grounded && !canGoInAir)
@@ -296,11 +323,13 @@ namespace ModalFunctions.Controller
             if (jump && animator.GetBool("Observe") && !timeManager.TimePassed())
             {
                 timeManager.ResetTimePassed();
+                animator.SetBool("Observe", false);
                 FallFromObserveState(500f);
             }
             if (timeManager.TimePassed())
             {
                 FallFromObserveState(100f);
+                animator.SetBool("Observe", false);
                 timeManager.ResetTimePassed();
             }
           /*  if(ObserveTimeOver != null)

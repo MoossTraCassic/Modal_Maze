@@ -24,7 +24,7 @@ namespace ModalFunctions.Utils
 
         private void Start()
         {
-            layers = LayerMask.NameToLayer("Everything");
+            //**layers = LayerMask.NameToLayer("Everything");
             collider = GetComponent<Collider>();
             collider.isTrigger = true;
         }

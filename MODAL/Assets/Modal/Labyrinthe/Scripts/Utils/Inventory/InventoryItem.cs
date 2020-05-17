@@ -32,7 +32,7 @@ namespace ModalFunctions.Utils
 
         void Reset()
         {
-            layers = LayerMask.NameToLayer("Everything");
+            //*layers = LayerMask.NameToLayer("Everything");
             collider = GetComponent<Collider>();
             collider.isTrigger = true;
             dataSettings = new DataSettings();
@@ -48,13 +48,20 @@ namespace ModalFunctions.Utils
                 if (disableOnEnter)
                 {
                     OnDestroy.Invoke();
-                    gameObject.SetActive(false);
                     Save();
+                    StartCoroutine(Disable(gameObject));
+                    //gameObject.SetActive(false);
                 }
 
                 if (clip) AudioSource.PlayClipAtPoint(clip, transform.position);
 
             }
+        }
+
+        IEnumerator Disable(GameObject o)
+        {
+            yield return new WaitForSeconds(0.5f);
+            o.SetActive(false);
         }
 
         public void Save()

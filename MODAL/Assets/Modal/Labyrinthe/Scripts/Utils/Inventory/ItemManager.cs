@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using ModalFunctions.Controller;
 
 namespace ModalFunctions.Utils
@@ -17,6 +18,7 @@ namespace ModalFunctions.Utils
         public float teleportMinDistance = 20f;
 
         public Transform[] teleportTransforms;
+        public UnityEvent OnBlueActivation, OnGreenActivation, OnRedActivation;
 
         [SerializeField]
         private Destination m_destination;
@@ -69,7 +71,10 @@ namespace ModalFunctions.Utils
 
             if (m_blueCheker.CheckInventory(m_inventoryController))
             {
+                OnBlueActivation.Invoke();
+
                 ActivateCanGoinAir();
+                StartCoroutine(MakeJump());
                 for (int i = 0; i < m_blueCheker.inventoryItems.Length; i++)
                     m_inventoryController.RemoveItem(m_blueCheker.inventoryItems[i]);
             }
@@ -80,12 +85,20 @@ namespace ModalFunctions.Utils
             PlayerController.instance.canGoInAir = true;
         }
 
+        IEnumerator MakeJump()
+        {
+            PlayerController.instance.p_jump = true;
+            yield return null;
+            PlayerController.instance.p_jump = false;
+        }
+
         void GreenEffect()
         {
             if (m_greenCheker == null) return;
 
             if (m_greenCheker.CheckInventory(m_inventoryController))
             {
+                OnGreenActivation.Invoke();
                 TeleportToTheNextDestination();
                 for (int i = 0; i < m_greenCheker.inventoryItems.Length; i++)
                     m_inventoryController.RemoveItem(m_greenCheker.inventoryItems[i]);
@@ -118,6 +131,8 @@ namespace ModalFunctions.Utils
 
         void RedEffect()
         {
+            OnRedActivation.Invoke();
+
             if (m_redCheker == null) return;
 
             if (m_redCheker.CheckInventory(m_inventoryController))

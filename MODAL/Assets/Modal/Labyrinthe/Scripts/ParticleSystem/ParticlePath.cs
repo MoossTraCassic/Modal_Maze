@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ModalFunctions.Controller;
@@ -17,8 +17,8 @@ namespace ModalFunctions.Utils{
     	{
             //pathVFX = GetComponentsInChildren<ParticleSystem>();
     		m_Play = false;
-		for(int i=0; i<pathVFX.Length; i++)
-    			pathVFX[i].gameObject.SetActive(false);
+				for(int i=0; i<pathVFX.Length; i++)
+    					pathVFX[i].gameObject.SetActive(false);
 		
     	}
 

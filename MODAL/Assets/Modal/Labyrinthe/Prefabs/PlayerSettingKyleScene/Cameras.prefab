@@ -150,7 +150,7 @@ MonoBehaviour:
     m_RecenteringTime: 2
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
-  m_BindingMode: 3
+  m_BindingMode: 4
   m_SplineCurvature: 0.2
   m_Orbits:
   - m_Height: 4
@@ -283,8 +283,8 @@ MonoBehaviour:
   m_VerticalDamping: 0
   m_ScreenX: 0.5
   m_ScreenY: 0.6
-  m_DeadZoneWidth: 0.1
-  m_DeadZoneHeight: 0.1
+  m_DeadZoneWidth: 0
+  m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
@@ -458,8 +458,8 @@ MonoBehaviour:
   m_VerticalDamping: 0
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_DeadZoneWidth: 0.1
-  m_DeadZoneHeight: 0.1
+  m_DeadZoneWidth: 0
+  m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
@@ -633,8 +633,8 @@ MonoBehaviour:
   m_VerticalDamping: 0
   m_ScreenX: 0.5
   m_ScreenY: 0.55
-  m_DeadZoneWidth: 0.05
-  m_DeadZoneHeight: 0.05
+  m_DeadZoneWidth: 0
+  m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
@@ -693,7 +693,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317373692268717790}
-  m_LocalRotation: {x: -0.07088006, y: 0.012347968, z: 0.050489336, w: 0.99612975}
+  m_LocalRotation: {x: -0.07133026, y: 0.0036797468, z: 0.051387113, w: 0.99612147}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -869,7 +869,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317373692406619955}
   m_LocalRotation: {x: 0.08715578, y: -0, z: -0, w: 0.9961947}
-  m_LocalPosition: {x: -215.17174, y: -32.603, z: -258.7978}
+  m_LocalPosition: {x: -215.03212, y: -34.023, z: -258.799}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 317373693147558985}
@@ -923,14 +923,14 @@ MonoBehaviour:
   m_Heading:
     m_HeadingDefinition: 2
     m_VelocityFilterStrength: 2
-    m_HeadingBias: 1
+    m_HeadingBias: 0
   m_RecenterToTargetHeading:
     m_enabled: 1
     m_RecenterWaitTime: 5
     m_RecenteringTime: 2
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
-  m_BindingMode: 3
+  m_BindingMode: 4
   m_SplineCurvature: 0.2
   m_Orbits:
   - m_Height: 8
@@ -968,7 +968,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317373692437504718}
-  m_LocalRotation: {x: -0.008597834, y: -0.0017991142, z: -0.9999608, w: -0.001115873}
+  m_LocalRotation: {x: -0.0000021846172, y: -0.001803495, z: -0.99999833, w: 0.00038374105}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1405,7 +1405,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317373693147558984}
-  m_LocalRotation: {x: 0.025084652, y: -0.008629091, z: 0.0012992378, w: -0.9996473}
+  m_LocalRotation: {x: 0.02508561, y: -0.00000024510746, z: 0.00000001547544, w: -0.9996853}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

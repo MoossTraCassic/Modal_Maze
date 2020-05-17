@@ -40,7 +40,7 @@ MonoBehaviour:
     - SceneName: TitleScreen
       DisplayName: 
       Description: 
-      SkipType: 2
+      SkipType: 0
       LoadingType: 0
       FakeLoadingTime: 10.8
       Backgrounds:
@@ -65,7 +65,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 2650407d6311724489f3256696e75bb0, type: 3}
       - {fileID: 21300000, guid: d693da8ebc165674b9509bab6391e358, type: 3}
     - SceneName: LevelEasy
-      DisplayName: Second
+      DisplayName: First
       Description: 
       SkipType: 1
       LoadingType: 0
@@ -111,8 +111,10 @@ MonoBehaviour:
     array:
     - Explore the World to discover all the possibilities
     - Adopt your own Strategy to figure out situations
-    - Remember Items Could be use in different ways
-    - Blue Items make you use your ability to float
-    - Red Items can only be Use at certain places to teleport
-    - A good strategy increases your chances, Be patient
-    - Green Items makes you deform Time
+    - Remember Items Could be use in different ways, So Combine them
+    - Blue Items, are very useful, use them when you're really lost or in a cul-de-sac
+    - Red Items, worth it use them when you see your destination
+    - A good strategy increases your chances, Be patient and explore first to master
+      the world
+    - Green Items, closes you to your destination, But be careful with them
+    - Using a blue Item in from of a wall is always beneficial

@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 689548816}
   - component: {fileID: 689548815}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: SceneLoader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -297,10 +297,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1024, y: 768}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2144,6 +2144,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneLoader 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11402364, guid: 7c94a5188defce1429e32caaa6f6e57f, type: 3}
+      propertyPath: TimePerTip
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 22401772, guid: 7c94a5188defce1429e32caaa6f6e57f, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -4.3499756
@@ -2630,6 +2634,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4699364463808866855, guid: cd0dcfc6e940468459f9d22f381482e1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4699364463808866855, guid: cd0dcfc6e940468459f9d22f381482e1,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4699364463808866855, guid: cd0dcfc6e940468459f9d22f381482e1,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd0dcfc6e940468459f9d22f381482e1, type: 3}

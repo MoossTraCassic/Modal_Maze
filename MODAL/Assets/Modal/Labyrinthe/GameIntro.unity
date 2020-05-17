@@ -382,7 +382,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Moussa TRAORE Project for INJ472J\n         Last Update : Wed 29/ 2020"
+  m_Text: "Moussa TRAORE Project for INJ472J\n         Last Update : Thu 14/ 2020"
 --- !u!222 &543862235
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -426,7 +426,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 40.5}
-  m_SizeDelta: {x: 577.06, y: 50}
+  m_SizeDelta: {x: 141.4, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &551483595
 MonoBehaviour:
@@ -446,7 +446,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LOST WORLD
+  m_text: LU
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -516,10 +516,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 7.0203857, w: -31.58551}
   m_textInfo:
     textComponent: {fileID: 551483595}
-    characterCount: 10
+    characterCount: 2
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -662,13 +662,17 @@ PrefabInstance:
       propertyPath: FadeOutSpeed
       value: 0.97
       objectReference: {fileID: 0}
+    - target: {fileID: 11467822, guid: 0009ccf09c8b9c6428d9895e2f090d1d, type: 3}
+      propertyPath: TimePerTip
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 22411256, guid: 0009ccf09c8b9c6428d9895e2f090d1d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 15.100006
+      value: 15.099976
       objectReference: {fileID: 0}
     - target: {fileID: 22457880, guid: 0009ccf09c8b9c6428d9895e2f090d1d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -9.100006
+      value: -9.099976
       objectReference: {fileID: 0}
     - target: {fileID: 22483402, guid: 0009ccf09c8b9c6428d9895e2f090d1d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -809,7 +813,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1040.67, y: 522.6}
+  m_SizeDelta: {x: 1024, y: 768}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &875133636
 MonoBehaviour:
@@ -860,7 +864,7 @@ GameObject:
   - component: {fileID: 1414588033}
   - component: {fileID: 1414588032}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: SceneLoader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -898,9 +902,9 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1024, y: 768}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1063,13 +1067,14 @@ RectTransform:
   - {fileID: 875133635}
   - {fileID: 551483594}
   - {fileID: 543862233}
+  - {fileID: 2116934901}
   m_Father: {fileID: 1414588035}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1040, y: 385}
+  m_SizeDelta: {x: 1024, y: 768}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1764547352
 MonoBehaviour:
@@ -1138,12 +1143,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1160,4 +1165,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764547350}
+  m_CullTransparentMesh: 1
+--- !u!1 &2116934900
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2116934901}
+  - component: {fileID: 2116934903}
+  - component: {fileID: 2116934902}
+  m_Layer: 5
+  m_Name: Text (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2116934901
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116934900}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1764547351}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 20.3, y: -75.6}
+  m_SizeDelta: {x: 209.79, y: 44.2}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2116934902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116934900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 2e94def62c52d154f9ff4eeb7be8892d, type: 3}
+    m_FontSize: 18
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: '           MIND OF LOST'
+--- !u!222 &2116934903
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116934900}
   m_CullTransparentMesh: 0

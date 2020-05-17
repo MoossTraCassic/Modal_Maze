@@ -138,6 +138,51 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2992095519221680739}
     m_Modifications:
+    - target: {fileID: 8456949471547415514, guid: 0c6ccda58af1d794b947fce40445c692,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.r
+      value: 0.50980395
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456949471547415514, guid: 0c6ccda58af1d794b947fce40445c692,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 0.7442206
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456949471547415514, guid: 0c6ccda58af1d794b947fce40445c692,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456949471886583792, guid: 0c6ccda58af1d794b947fce40445c692,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.r
+      value: 0.33725488
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456949471886583792, guid: 0c6ccda58af1d794b947fce40445c692,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 0.5710365
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456949471886583792, guid: 0c6ccda58af1d794b947fce40445c692,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456949482618265176, guid: 0c6ccda58af1d794b947fce40445c692,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.r
+      value: 0.16470586
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456949482618265176, guid: 0c6ccda58af1d794b947fce40445c692,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 0.31581727
+      objectReference: {fileID: 0}
+    - target: {fileID: 8456949482618265176, guid: 0c6ccda58af1d794b947fce40445c692,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.b
+      value: 0.7176471
+      objectReference: {fileID: 0}
     - target: {fileID: 8638463512144085698, guid: 0c6ccda58af1d794b947fce40445c692,
         type: 3}
       propertyPath: m_Name

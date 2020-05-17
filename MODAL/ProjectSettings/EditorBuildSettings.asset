@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Loading Screen/Example/Scenes/LoadExample.unity
-    guid: 511f544c1ae32b3448425de6b65acff2
-  - enabled: 1
     path: Assets/Modal/Labyrinthe/GameIntro.unity
     guid: 9564af2aad227884f8ba106f7d666683
   - enabled: 1
@@ -29,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Modal/Labyrinthe/EndingScene.unity
     guid: 36b6b75041d51464d998861df4707bf2
+  - enabled: 0
+    path: Assets/Loading Screen/Example/Scenes/LoadExample.unity
+    guid: 511f544c1ae32b3448425de6b65acff2
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: afb1c9c02cbcb1a4eaa59d222c9e05ce,
       type: 2}

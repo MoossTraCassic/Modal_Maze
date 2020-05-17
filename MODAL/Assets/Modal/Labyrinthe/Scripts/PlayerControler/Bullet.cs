@@ -99,6 +99,7 @@ namespace ModalFunctions.Utils
             if ((damageMask & 1 << other.gameObject.layer) == 1 << other.gameObject.layer)
             {
                 print("Touched PNJ");
+                //gameObject.SetActive(false);
                 DamageCollided(other.collider);
             }
         }

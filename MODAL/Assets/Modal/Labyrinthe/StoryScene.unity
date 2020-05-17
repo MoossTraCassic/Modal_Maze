@@ -355,7 +355,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22401772, guid: 7c94a5188defce1429e32caaa6f6e57f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -4.350006
+      value: -4.3500366
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401772, guid: 7c94a5188defce1429e32caaa6f6e57f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 69.79999
       objectReference: {fileID: 0}
     - target: {fileID: 22403272, guid: 7c94a5188defce1429e32caaa6f6e57f, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -610,10 +614,16 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "FINALLY THE APOCALYPSE CAME. FIRST IT WAS ALL ABOUT RUNNING? FAMILLY AND
-    FRIENDS WAS ALL THAT MATTER. BUT NOW I'VE LOSE ALL OF THAT. NOTHING REST. BUT
-    ONE CHANCE STAND FOR ME. I HAVE TO REACH SKY-CITY AND JOIN THE REVOLUTION. OUR
-    LORD IS SURELY ALIVE. \nBUT BEFORE ;\n\nwHERE AM I ?"
+  m_Text: 'ADAM AND THE OTHER GUARDS ARE SURELY LOOKING FOR ME!
+
+    THEY KNEW  WITHOUT
+    MY ABILITY, THE OTHER DONT STAND A CHANCE?
+
+    LEST JOIN THEM BUT BEFORE.
+
+
+    WHERE
+    AM I ?'
 --- !u!222 &951457831
 CanvasRenderer:
   m_ObjectHideFlags: 0

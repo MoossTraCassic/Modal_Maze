@@ -183,7 +183,7 @@ Material:
     - _vertOffset: 0
     - _vertScale: 0.1
     m_Colors:
-    - _Color: {r: 4.695482, g: 8.5452795, b: 2.5436144, a: 1}
+    - _Color: {r: 11.408619, g: 11.408619, b: 11.408619, a: 1}
     - _Color01: {r: 1, g: 1, b: 1, a: 1}
     - _Color02: {r: 1, g: 1, b: 1, a: 1}
     - _Color2: {r: 0, g: 0.049780887, b: 0.18946455, a: 1}

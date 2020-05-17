@@ -194,6 +194,7 @@ namespace ModalFunctions.PNJ
             {
                 print("Touched");
                 DamageCollided(other.collider);
+                gameObject.SetActive(false);
             }
         }
 

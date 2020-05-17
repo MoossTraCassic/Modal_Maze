@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -68,7 +68,7 @@ namespace ModalFunctions.Utils
         public void DoSlowDown()
         {
             m_initialFixeddeltaTime = Time.fixedDeltaTime;
-            //slowMotion = true;
+            Debug.Log(m_initialFixeddeltaTime);
             Time.timeScale = slowDownFactor;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
 
@@ -80,6 +80,8 @@ namespace ModalFunctions.Utils
             while(Time.timeScale < 1f)
             {
                 Time.timeScale += (1f / slowDownLength) * Time.unscaledDeltaTime;
+                Time.fixedDeltaTime += (1f / slowDownLength) * Time.unscaledDeltaTime;
+                Time.fixedDeltaTime = Mathf.Clamp(Time.unscaledDeltaTime, 0f, m_initialFixeddeltaTime);
                 Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
                 yield return null;
             }
@@ -116,7 +118,7 @@ namespace ModalFunctions.Utils
             timePassed = false;
             if(timeCount != null)
             {
-                print("timePassed Stoped");
+                print("time Stoped");
                 StopCoroutine(timeCount);
             }
         }
