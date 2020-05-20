@@ -15,7 +15,6 @@ namespace ModalFunctions.Utils{
 
     	void Start()
     	{
-            //pathVFX = GetComponentsInChildren<ParticleSystem>();
     		m_Play = false;
 				for(int i=0; i<pathVFX.Length; i++)
     					pathVFX[i].gameObject.SetActive(false);

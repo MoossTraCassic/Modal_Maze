@@ -7,14 +7,13 @@ namespace ModalFunctions.PNJ
     public class ObjectPooler<T> where T : UnityEngine.MonoBehaviour, IPooled<T>
     {
         public T[] instances;
-
-        //**protected Stack<int> m_FreeIdx;
+ 
         protected Queue<int> m_FreeIdx;
 
         public void Initialize(int count, T prefab)
         {
             instances = new T[count];
-            //**m_FreeIdx = new Stack<int>(count);
+ 
             m_FreeIdx = new Queue<int>(count);
 
             for (int i = 0; i < count; ++i)
@@ -24,14 +23,13 @@ namespace ModalFunctions.PNJ
                 instances[i].poolID = i;
                 instances[i].pool = this;
 
-                //**m_FreeIdx.Push(i);
                 m_FreeIdx.Enqueue(i);
             }
         }
 
         public T GetNew()
         {
-            //**int idx = m_FreeIdx.Pop();
+  
             int idx = m_FreeIdx.Dequeue();
             instances[idx].gameObject.SetActive(true);
 
@@ -40,9 +38,8 @@ namespace ModalFunctions.PNJ
 
         public void Free(T obj)
         {
-            //**m_FreeIdx.Push(obj.poolID);
+ 
             m_FreeIdx.Enqueue(obj.poolID);
-            //**instances[obj.poolID].gameObject.SetActive(false);
         }
     }
 

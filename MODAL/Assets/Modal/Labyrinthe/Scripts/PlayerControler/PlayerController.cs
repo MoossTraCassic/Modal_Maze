@@ -25,15 +25,7 @@ namespace ModalFunctions.Controller
 	    public Animator p_animator { get {return animator;} }
         public bool p_inFirePose { get{return PlayerIsInFireMode();} }
         public InventoryController Inventory { get { return inventoryController; } }
-        /*public bool CanGoInAir
-        {
-            get { return canGoInAir; }
-            set
-            {
-                canGoInAir = value;
-            }
-        }
-        */
+ 
         [HideInInspector]
         public bool p_jump;
         public Damageable m_damageable{get;private set;}
@@ -53,23 +45,26 @@ namespace ModalFunctions.Controller
         private Vector3 m_desiredDirection;
 
         private bool fired = false;
-        //private bool running = false;
-        //private bool stopRunning = false;
+ 
         private bool grounded = true;
         private bool raycast_grounded = true;
         private bool jump = false;
         private bool inFirePose = false;
         private bool m_HasControl = true;
-        //private bool gravityByScript = false;
+ 
         [HideInInspector]
         public bool canGoInAir = false;
+        [Range(0f,1f)]
+        public float m_damp = 0.4f;
+
+        public float m_angle = 180f;
 
         void Awake()
         {
             m_Input = GetComponent<PlayerInput>();
             inventoryController = GetComponent<InventoryController>();
             m_damageable = GetComponent<Damageable>();
-            //print("Player Founded");
+ 
             instance = this;
         }
         
@@ -78,14 +73,7 @@ namespace ModalFunctions.Controller
         {
             animator = GetComponent<Animator>();
             rigidbody = GetComponent<Rigidbody>();
-            
-            /*
-            if (rigidbody.isKinematic)
-            {
-                gravityByScript = true;
-                //print(gravityByScript);
-            }
-            */
+ 
             canGoInAir = false;
         }
 
@@ -94,23 +82,7 @@ namespace ModalFunctions.Controller
         {
             Move();
         }
-        /*
-        public void OnAnimatorMove()
-        {
-            // we implement this function to override the default root motion.
-            // this allows us to modify the positional speed before it's applied.
-            if (grounded && Time.deltaTime > 0)
-            {
-                Vector3 v = (animator.deltaPosition * 1f) / Time.deltaTime;
-
-                // we preserve the existing y part of the current velocity.
-                v.x = rigidbody.velocity.x;
-                v.z = rigidbody.velocity.z;
-
-                rigidbody.velocity = v;
-            }
-        }
-        */
+ 
 
         private bool PlayerIsInFireMode()
         {
@@ -120,26 +92,7 @@ namespace ModalFunctions.Controller
 
         private void GroundMovement()
         {
-            // running = false;
-           /* 
-            if (Input.GetButton("RightOne") && speedFactor != 1f)
-            {
-                speedFactor = speedFactor < 1 ? speedFactor += 0.05f : speedFactor = 1;
-                running = true;
-            }
-            if (Input.GetButtonUp("RightOne"))
-            {
-                stopRunning = true;
-            }
-            if (stopRunning)
-            {
-                speedFactor = speedFactor > 0.5f ? speedFactor -= 0.05f : speedFactor = 0.5f;
-                if (speedFactor == 0.5f)
-                {
-                    stopRunning = false;
-                }
-            }
-            */
+        
             
             if (Input.GetButtonDown("RightOne"))
             {
@@ -168,18 +121,18 @@ namespace ModalFunctions.Controller
             }
             else
             {
-                rigidbody.AddForce(Vector3.up * JumpForce);
-
-                // rigidbody.velocity = new Vector3(rigidbody.velocity.x, JumpForce, rigidbody.velocity.z);
-				// m_IsGrounded = false;
-				// animator.applyRootMotion = false;
+                // Used for the initial vertical jump
+                //** rigidbody.AddForce(Vector3.up * JumpForce);
+                
+                 rigidbody.velocity = new Vector3(rigidbody.velocity.x, JumpForce, rigidbody.velocity.z);
+			     animator.applyRootMotion = false;
+                
 
                 animator.SetTrigger("Jump");
             }
         }
         public void FallFromObserveState(float smoothTranslate)
         {
-            // print("Start Addforce");
             foreach (GameObject orbeClone in bulletManager.GetClones())
             {
                 if (orbeClone != null)
@@ -187,7 +140,6 @@ namespace ModalFunctions.Controller
                     orbeClone.GetComponent<OrbeRotation>().Decelerate();
                 }
             }
-            // animator.SetBool("Observe", false);
             StartCoroutine(AddForceToGrounded(smoothTranslate));
         }
 
@@ -201,8 +153,6 @@ namespace ModalFunctions.Controller
                 yield return null;
             }
             canGoInAir = false;
-            // timeManager.ResetTimePassed();
-            ///print("Landed");
         }
 
         private void CheckGroundStatus()
@@ -210,9 +160,9 @@ namespace ModalFunctions.Controller
             if (Physics.Raycast(transform.position + (Vector3.up * 0.5f), Vector3.down, groundDistance, ground))
             {
                 animator.SetBool("Grounded", true);
-                // animator.applyRootMotion = true;  //
-                // raycast_grounded = true;
-                // print("ground hitted");
+
+                animator.applyRootMotion = true; 
+                 
             }
             else
             {
@@ -220,7 +170,7 @@ namespace ModalFunctions.Controller
                 // apply extra gravity from multiplier:
                 if (!canGoInAir)
                 {
-                    // animator.applyRootMotion = false;   //
+                    animator.applyRootMotion = false;
                     
                     Vector3 extraGravityForce = (Physics.gravity * m_GravityMultiplier) - Physics.gravity;
                     rigidbody.AddForce(extraGravityForce);
@@ -235,7 +185,7 @@ namespace ModalFunctions.Controller
                                 v.y = rigidbody.velocity.y;
                                 rigidbody.velocity = v;
                 */
-                // willl produce error if uncomment
+                // willl produce misbehavior if uncomment
                 //Vector3 jumpDirection = transform.forward * (speedFactor - 0.5f); // * rigidbody.velocity.normalized.z * 8f;
                 //rigidbody.AddForce(jumpDirection * JumpForce);
             }
@@ -246,30 +196,12 @@ namespace ModalFunctions.Controller
             if (m_goFire >= 0.5f && animator.GetCurrentAnimatorStateInfo(0).IsName("Motion"))
             {
                 animator.SetBool("GoFire", true);
-                //speedFactor = speedFactor < 1 ? speedFactor += 0.06f : speedFactor = 1;
             }
-            if (m_goFire < 0.5f )//&& !running)
+            if (m_goFire < 0.5f )
             {
-                animator.SetBool("GoFire", false);
-                //speedFactor = speedFactor > 0.5f ? speedFactor -= 0.05f : speedFactor = 0.5f;
+                animator.SetBool("GoFire", false); 
             }
         }
-        /*
-        private void applyScriptGravity()
-        {
-            print("moving");
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 0.1f, transform.position.z), 0.4f);
-        }
-        */
-        [Range(0f,1f)]
-        public float m_damp = 0.4f;
-
-        public float m_angle = 180f;
-
-        /*void GetOrientation(float X, float Y)
-        {
-
-        }*/
 
         private void Move()
         {
@@ -281,23 +213,16 @@ namespace ModalFunctions.Controller
             m_vertical = m_HasControl ? Mathf.Clamp(m_vertical * speedFactor, 0f, 1f) : 0f;
             m_horizontal = m_HasControl ? Mathf.Clamp(m_horizontal, -1f, 1f) : 0f;
 
-            //*
             m_cameraForward = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized;  
 
 
             m_desiredDirection = m_vertical * m_cameraForward + m_horizontal * Camera.main.transform.right.normalized;
             float direction = Vector3.Angle(transform.forward, m_desiredDirection) * Mathf.Sign(Vector3.Dot(m_desiredDirection, transform.right))/m_angle;
 
-            //float direction = Mathf.Atan2(m_horizontal, m_vertical) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
-
             float speed = m_vertical < 0.1f ? m_vertical : m_desiredDirection.magnitude;
 
             animator.SetFloat("WalkSpeed", speed, 0.4f, Time.deltaTime);
             animator.SetFloat("TurnSpeed", direction, m_damp, Time.deltaTime);
-
-            //*
-            //**animator.SetFloat("WalkSpeed", m_vertical, 0.4f, Time.deltaTime);
-            //**animator.SetFloat("TurnSpeed", m_horizontal, m_damp, Time.deltaTime);
 
             m_goFire = m_HasControl ? Input.GetAxis("Axis_9") : 0f;
             m_fire = m_HasControl ? Input.GetAxis("Axis_10") : 0f;
@@ -305,12 +230,7 @@ namespace ModalFunctions.Controller
             grounded = animator.GetCurrentAnimatorStateInfo(0).IsName("Motion");
             jump = (Input.GetButtonDown("Jump") || p_jump) && m_HasControl ;
             inFirePose = animator.GetCurrentAnimatorStateInfo(0).IsName("FirePose");
-            /*
-            if (gravityByScript && !raycast_grounded && !canGoInAir)
-            {
-                applyScriptGravity();   
-            }
-            */
+
             if (grounded)
             {
                 GroundMovement();
@@ -332,13 +252,6 @@ namespace ModalFunctions.Controller
                 animator.SetBool("Observe", false);
                 timeManager.ResetTimePassed();
             }
-          /*  if(ObserveTimeOver != null)
-            {
-                if (ObserveTimeOver())
-                {
-                    FallFromObserveState();
-                }
-            }*/
 
             CheckGroundStatus();
 
@@ -353,13 +266,6 @@ namespace ModalFunctions.Controller
             {
                 fired = false;
             }
-            /*
-            m_vertical = Mathf.Clamp(m_vertical * speedFactor, 0f, 1f);
-            m_horizontal = Mathf.Clamp(m_horizontal * speedFactor, -1f, 1f);
-
-            animator.SetFloat("WalkSpeed", m_vertical, 0.5f, Time.deltaTime);
-            animator.SetFloat("TurnSpeed", m_horizontal, 0.5f, Time.deltaTime);
-            */
         }
 
         private void Fire()
@@ -374,163 +280,13 @@ namespace ModalFunctions.Controller
 
         public void Hit()
         {
-            // if(damageAudioPlayer != null) 
-            //    damageAudioPlayer.PlayRandomClip();
             animator.SetTrigger("Hurt");
-            // m_CoreMaterial.SetColor("_Color2", Color.red);
         }
 
         public void Die()
         {
-            // if(deathAudioPlayer != null)
-            //     deathAudioPlayer.PlayRandomClip();
             animator.SetTrigger("Death");
         }
 
     }
 }
-
-/*
-namespace ModalFunctions.Controller
-{
-    public class PlayerController : MonoBehaviour
-    {
-        [Tooltip("Layer Representing Ground")]
-        public LayerMask ground;
-
-        [Tooltip("Distance from ground to be considered as landed")]
-        public float groundDistance = 1f;
-        public float JumpForce = 500f;
-        public BulletManager bulletManager;
-        public bool canGoInAir = false;
-
-        private Animator animator;
-        private new Rigidbody rigidbody;
-        private float speedFactor = 0.5f;
-
-        private bool fired = false;
-        private bool stopRunning = false;
-
-        // Start is called before the first frame update
-        void Start()
-        {
-            animator = GetComponent<Animator>();
-            rigidbody = GetComponent<Rigidbody>();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            Move();
-        }
-
-        private void Move()
-        {
-
-            // Handle walking movement
-            var horizontal = Input.GetAxis("Horizontal");
-            var vertical = Input.GetAxis("Vertical");
-            bool running = false;
-
-            if (Input.GetButton("RightOne") && speedFactor != 1f && animator.GetCurrentAnimatorStateInfo(0).IsName("Motion")) 
-            {
-                speedFactor = speedFactor < 1 ? speedFactor += 0.05f : speedFactor = 1;
-                running = true;
-            }
-            if(Input.GetButtonUp("RightOne"))
-            {
-                stopRunning = true;
-            }
-            if (stopRunning && animator.GetCurrentAnimatorStateInfo(0).IsName("Motion"))
-            {
-                speedFactor = speedFactor > 0.5f ? speedFactor -= 0.05f : speedFactor = 0.5f;
-                if(speedFactor == 0.5f)
-                {
-                    //Debug.Log("Walk");
-                    stopRunning = false;
-                }
-            }
-
-            animator.SetFloat("WalkSpeed", vertical * speedFactor);
-            animator.SetFloat("TurnSpeed", horizontal * speedFactor);
-
-            // Handle Jumping and goInAir
-            if (Input.GetButtonDown("Jump") && animator.GetCurrentAnimatorStateInfo(0).IsName("Motion"))
-            {
-                if (canGoInAir)
-                {
-                    foreach (GameObject orbeClone in bulletManager.GetClones())
-                    {
-                        if (orbeClone != null)
-                        {
-                            orbeClone.GetComponent<OrbeRotation>().Accelerate();
-                        }
-                    }
-                    animator.SetTrigger("GoInObservation");
-                }
-                else
-                {
-                    rigidbody.AddForce(Vector3.up * JumpForce);
-                    animator.SetTrigger("Jump");
-                }
-            }
-            if(Input.GetButtonDown("Jump") && animator.GetBool("Observe"))
-            {
-                foreach (GameObject orbeClone in bulletManager.GetClones())
-                {
-                    if (orbeClone != null)
-                    {
-                        orbeClone.GetComponent<OrbeRotation>().Decelerate();
-                    }
-                }
-                animator.SetBool("Observe", false);
-                //rigidbody.AddForce(Vector3.forward * JumpForce * 10f);
-            }
-
-            if (Physics.Raycast(transform.position + (Vector3.up * 0.5f), Vector3.down, groundDistance, ground))
-            {
-                animator.SetBool("Grounded", true);
-            }
-            else
-            {
-                animator.SetBool("Grounded", false);
-                Vector3 jumpDirection = transform.forward * (speedFactor - 0.5f) * 2f;
-                rigidbody.AddForce(jumpDirection * JumpForce);
-            }
-
-            // Handle Go Fire Position
-            var goFire = Input.GetAxis("Axis_9");
-            var fire = Input.GetAxis("Axis_10");
-            if (goFire >= 0.5f && animator.GetCurrentAnimatorStateInfo(0).IsName("Motion"))
-            {
-                animator.SetBool("GoFire", true);
-                speedFactor = speedFactor < 1 ? speedFactor += 0.06f : speedFactor = 1;
-            }
-            if (goFire == 0f && !running )
-            {
-                animator.SetBool("GoFire", false);
-                speedFactor = speedFactor > 0.5f ? speedFactor -= 0.05f : speedFactor = 0.5f;
-            }
-
-            // Handle Fire
-            if (fire >= 0.8f && animator.GetCurrentAnimatorStateInfo(0).IsName("FirePose"))
-            {
-                if (!fired)
-                {
-                    animator.SetTrigger("Fire");
-
-                    fired = true;
-                }
-            }
-            if(fire == 0f)
-            {
-                fired = false;
-            }
-
-            // Handle Observation
-
-
-        }
-    }
-}
-*/

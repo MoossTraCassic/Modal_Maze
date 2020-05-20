@@ -76,11 +76,6 @@ namespace ModalFunctions.Utils
 
         public static void RestartZone(bool resetHealth = true)
         {
-            // TODO:
-            // if(resetHealth && PlayerCharacter.PlayerInstance != null)
-            // {
-            //     PlayerCharacter.PlayerInstance.damageable.SetHealth(PlayerCharacter.PlayerInstance.damageable.startingHealth);
-            // }
 
             Instance.StartCoroutine(Instance.Transition(Instance.m_CurrentZoneScene.name, Instance.m_ZoneRestartDestinationTag));
         }

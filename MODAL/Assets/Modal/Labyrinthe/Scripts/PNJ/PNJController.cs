@@ -13,7 +13,7 @@ namespace ModalFunctions.PNJ
         public bool interpolateTurning = false;
         public bool applyAnimationRotation = false;
 
-        public Animator animator { get { return m_Animator; } }  // !!! important
+        public Animator animator { get { return m_Animator; } } 
         public Vector3 externalForce { get { return m_ExternalForce; } }
         public NavMeshAgent navmeshAgent { get { return m_NavMeshAgent; } }
         public bool followNavmeshAgent { get { return m_FollowNavmeshAgent; } }
@@ -83,33 +83,7 @@ namespace ModalFunctions.PNJ
 
             m_NavMeshAgent.Warp(m_Rigidbody.position);
         }
-	/*
-        private void OnAnimatorMove()
-        {
-            if (m_UnderExternalForce)
-                return;
-
-            if (m_FollowNavmeshAgent)
-            {
-                m_NavMeshAgent.speed = (m_Animator.deltaPosition / Time.deltaTime).magnitude;
-                transform.position = m_NavMeshAgent.nextPosition;
-            }
-            else
-            {
-                RaycastHit hit;
-                if (!m_Rigidbody.SweepTest(m_Animator.deltaPosition.normalized, out hit,
-                    m_Animator.deltaPosition.sqrMagnitude))
-                {
-                    m_Rigidbody.MovePosition(m_Rigidbody.position + m_Animator.deltaPosition);
-                }
-            }
-
-            if (applyAnimationRotation)
-            {
-                transform.forward = m_Animator.deltaRotation * transform.forward;
-            }
-        }
-    */
+        
         // used to disable position being set by the navmesh agent, for case where we want the animation to move the enemy instead (e.g. Chomper attack)
         public void SetFollowNavmeshAgent(bool follow)
         {

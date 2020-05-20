@@ -16,13 +16,6 @@ namespace ModalFunctions.Maze
         {
             return edges[(int)direction];
         }
-        /*
-        public void SetEdge(MazeDirection direction, CellEdge edge)
-        {
-            edges[(int)direction] = edge;
-        }
-        */
-        
 
         public bool IsFullyInitialized
         {

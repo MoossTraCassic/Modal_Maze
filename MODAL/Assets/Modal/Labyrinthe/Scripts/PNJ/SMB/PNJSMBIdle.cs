@@ -15,7 +15,6 @@ namespace ModalFunctions.PNJ
             //if we came back to idle, we reset all trigger & bool, as we want to "restart" a cycle of looking, orienting, attacking
             
             animator.SetBool(PNJBehaviour.hashInPursuitParam, false);
-            // animator.ResetTrigger(PNJBehaviour.hashMeleeAttack);
             animator.ResetTrigger(PNJBehaviour.hashRangeAttack);
             
         }
@@ -28,22 +27,7 @@ namespace ModalFunctions.PNJ
             if (m_MonoBehaviour.target != null)
             {
                 Vector3 toTarget = m_MonoBehaviour.target.transform.position - m_MonoBehaviour.transform.position;
-                /*
-                if (toTarget.sqrMagnitude < m_MonoBehaviour.meleeRange * m_MonoBehaviour.meleeRange)
-                {
-                    if (m_MonoBehaviour.OrientTowardTarget() == GrenadierBehaviour.OrientationState.ORIENTED_FACE)
-                    {
-                        animator.SetTrigger(GrenadierBehaviour.hashMeleeAttack);
-                    }
-                    else if (!m_MonoBehaviour.shieldUp)
-                    {
-                        //we don't turn, we do a shield attack, reset the turn apram set by the orient function
-                        animator.ResetTrigger(GrenadierBehaviour.hashTurnTriggerParam);
-                        animator.SetTrigger(GrenadierBehaviour.hashRotateAttackParam);
-                    }
-                }
-                */
-                // else if (toTarget.sqrMagnitude < m_MonoBehaviour.rangeRange * m_MonoBehaviour.rangeRange)
+            
                 Damageable damagePlayer = m_MonoBehaviour.target.m_damageable;
 
                 bool attackable = damagePlayer.currentHitPoints > 0;

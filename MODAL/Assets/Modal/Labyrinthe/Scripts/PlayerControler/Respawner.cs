@@ -14,8 +14,6 @@ namespace ModalFunctions.Controller
 
 		public float menuSwitchTime = 2f;
 		public UnityEvent OnRespawnStart;
-		//[HideInInspector]
-		//public bool m_isRespawning;
 
 		[SerializeField]
 		private StartUI m_Menu;
@@ -45,7 +43,6 @@ namespace ModalFunctions.Controller
 			yield return StartCoroutine(ScreenFader.FadeSceneOut(ScreenFader.FadeType.GameOver));
 
 			m_Menu.ActivateMenu();
-			//m_isRespawning = true;
 
 			yield return StartCoroutine(ScreenFader.FadeSceneIn());
 		}

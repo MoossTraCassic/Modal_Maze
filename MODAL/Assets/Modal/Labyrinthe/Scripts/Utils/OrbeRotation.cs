@@ -30,6 +30,7 @@ namespace ModalFunctions.Utils
             sens = Vector3.down;
             givenTurnSpeed = turnSpeed;
         }
+
         // Update is called once per frame
         void Update()
         {
@@ -37,12 +38,12 @@ namespace ModalFunctions.Utils
             pivot.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
 
             pivot.Translate(sens * translateSpeed * Time.deltaTime);
-            //pivot.position += sens * translateSpeed * Time.deltaTime; 
+ 
 
             if (Vector3.Distance(pivot.position , beginPosition) >= translateDistance)
             {
                 sens = (beginPosition - pivot.position).y > 0 ? Vector3.up : Vector3.down;
-                //sens *= -1;
+ 
             }
             
         }
@@ -72,7 +73,7 @@ namespace ModalFunctions.Utils
         {
             turnSpeed = givenTurnSpeed;
             translateSpeed = 0.2f;
-            //bullet.transform.localPosition = orbit;
+ 
             if(reset != null) 
             {
                 StopCoroutine(reset);
@@ -89,7 +90,7 @@ namespace ModalFunctions.Utils
                 yield return null;
             }
             bullet.transform.localPosition = orbit;
-            //print("Coroutine ended");
+ 
         }
     }
 }

@@ -54,11 +54,7 @@ namespace ModalFunctions.Utils
 
         public void RestartLevel()
         {
-            /*if(Respawner.Instance.m_isRespawning)
-            {
-                StartCoroutine(ScreenFader.FadeGameOverIn());
-                Respawner.Instance.m_isRespawning = false;
-            }*/
+ 
             m_InPause = true;
             SwitchPauseState();
             SceneController.RestartZone();
@@ -103,8 +99,7 @@ namespace ModalFunctions.Utils
                 }
             }
 
-            //if (!m_InPause)
-            //    CameraShake.Stop();
+   
 
             if (m_InPause)
                 PlayerInput.Instance.GainControl();

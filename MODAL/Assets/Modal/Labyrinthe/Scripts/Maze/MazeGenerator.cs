@@ -7,18 +7,13 @@ namespace ModalFunctions.Maze
     public class MazeGenerator : MonoBehaviour
     {
         public Maze mazePrefab;
-        /*
-        [Tooltip("The Scale of the Maze")]
-        [SerializeField]
-        public float mazeScale = 3f;
-        */
+
         private Maze mazeInstance;
 
         // Start is called before the first frame update
         private void Start()
         {
             Generate();
-            // NaveMeshBaker.instance.bake = true;
         }
 
         // Update is called once per frame
@@ -34,9 +29,6 @@ namespace ModalFunctions.Maze
         private void Generate()
         {
             mazeInstance = Instantiate<Maze>(mazePrefab);
-            //mazeInstance.cellPrefab.transform.localScale *= mazeScale;
-            //mazeInstance.wallPrefab.transform.localScale *= mazeScale;
-            //mazeInstance.mazeScale = mazeScale;
             mazeInstance.Generate();
         }
 

@@ -30,41 +30,23 @@ namespace ModalFunctions.Utils
         {
             if (other.CompareTag("Player"))
             {
-                /*if (!centered)
-                {
-                    StartCoroutine(translatePlayer());
-                    centered = true;
-                }*/
-                //rigidbody.AddForce(Vector3.up * 1000f);
+ 
+ 
                 animator.SetBool("Observe", true);
-                rigidbody.useGravity = false;
-                //timeManager.DoSlowDown();
+                rigidbody.useGravity = false; 
                 timeManager.PassTime(m_observationTime);
              
             }
         }
-        /*
-        private void OnTriggerStay(Collider other)
-        {
-            if (other.CompareTag("Player") && timeManager.TimePassed())
-            {
-                //PlayerController.instance.ObserveTimeOver += timeManager.TimePassed;
-                //PlayerController.instance.FallFromObserveState();
-                //animator.SetBool("Observe", false);
-                // timeManager.ResetTimePassed();
-                // rigidbody.useGravity = true;
-            }
-        }
-        */
+ 
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                //PlayerController.instance.ObserveTimeOver -= timeManager.TimePassed;
+ 
                 animator.SetBool("Observe", false);
                 rigidbody.useGravity = true;
-                //timeManager.UnDoSlowMotion();
-                //timeManager.ResetTimePassed();
+ 
             }
         }
 
@@ -82,11 +64,7 @@ namespace ModalFunctions.Utils
         {
             if (animator.GetBool("Grounded"))
             {
-                FollowPlayer();
-
-            
-             //   centered = false;
-             //   center = transform.position;
+                FollowPlayer(); 
             }
         }
 

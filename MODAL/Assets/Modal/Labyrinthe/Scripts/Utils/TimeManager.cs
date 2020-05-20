@@ -19,36 +19,7 @@ namespace ModalFunctions.Utils
         private IEnumerator timeCount;
 
         private float m_initialFixeddeltaTime;
-        /*
-        void Update()
-        {
-            if (Time.timeScale != 1f)
-            {
-                print("restored");
-            }
-            Time.timeScale += (1f / slowDownLength) * Time.unscaledDeltaTime;
-            Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
-            //}
-           /* if (slowMotion)
-            {
-                //StartCoroutine(CountSeconds(oneSecond));
-                //Debug.Log(seconds);
-                if (seconds >= slowDownLength)
-                {
-                    Time.timeScale += (1f / slowDownLength) * Time.unscaledDeltaTime;
-                    Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
-                    
-                }
-                if(Time.timeScale == 1f)
-                {
-                    //StopCoroutine(CountSeconds(oneSecond));
-                    slowMotion = false;
-                    Debug.Log("Done");
-                }
-            }
-            
-        } 
-        */
+        
         private void Awake()
         {
             s_instance = this;
@@ -63,7 +34,7 @@ namespace ModalFunctions.Utils
 
             timeCount = CountSeconds(secondsToReach);
             StartCoroutine(timeCount);
-            //StopCoroutine(CountSeconds(secondsToReach));
+ 
         }
         public void DoSlowDown()
         {

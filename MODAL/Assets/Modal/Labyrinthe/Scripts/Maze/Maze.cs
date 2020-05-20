@@ -8,7 +8,7 @@ namespace ModalFunctions.Maze
     public class Maze : MonoBehaviour
     {
         [Tooltip("Size of the maze")]
-        public IntVector2 size;      // Rewrite later to manage the difficulty of a level
+        public IntVector2 size;    
 
         [Tooltip("Representation of a cell of the Maze")]
         public List<Cell> cellPrefabs;
@@ -30,26 +30,13 @@ namespace ModalFunctions.Maze
             cells = new Cell[size.x, size.z];
             List<Cell> activeCells = new List<Cell>();
             DoFirstGenerationStep(activeCells);
-            //IntVector2 coordinates = RandomCoordinates;
-            //int avoidInfiniteLoop = 0;
-            while (activeCells.Count > 0)// && avoidInfiniteLoop < 2000)
+
+
+            while (activeCells.Count > 0)
             {
-                //avoidInfiniteLoop += 1;
-                /*
-                CreateCell(coordinates);
-                coordinates += MazeDirections.RandomValue.ToIntVector2();
-                */
+
                 DoNextGenerationStep(activeCells);
             }
-            /*
-            for (int x = 0; x < size.x; x++)
-            {
-                for (int z = 0; z < size.z; z++)
-                {
-                    CreateCell(new IntVector2(x, z));
-                }
-            }
-            */
         }
 
         private void DoFirstGenerationStep(List<Cell> activeCells)
@@ -83,15 +70,11 @@ namespace ModalFunctions.Maze
                         CreateWall(currentCell, neighbor, direction);
                     else
                         CreatePassage(currentCell, neighbor, direction);
-                    //activeCells.RemoveAt(currentIndex);
-                    // no longer remove the Cell
                 }
             }
             else
             {
                 CreateWall(currentCell, null, direction);
-                //activeCells.RemoveAt(currentIndex);
-                // no longer remove the Cell 
             }
         }
 
@@ -105,10 +88,8 @@ namespace ModalFunctions.Maze
             newCell.transform.parent = transform;
             newCell.transform.localPosition =
                 new Vector3(coordinates.x * mazeScaleXZ , 0f, coordinates.z * mazeScaleXZ);
-            // new Vector3(coordinates.x * mazeScaleXZ - size.x * mazeScaleXZ * 0.5f, 0f, coordinates.z * mazeScaleXZ - size.z * mazeScaleXZ * 0.5f);
             newCell.transform.localScale *= mazeScaleXZ;
 
-            // NaveMeshBaker.instance.GetNavMeshSurfaces().Add(newCell.GetComponentInChildren<NavMeshSurface>());
             return newCell;
         }
 
@@ -128,16 +109,6 @@ namespace ModalFunctions.Maze
             wall.transform.localScale = new Vector3( wall.transform.localScale.x * mazeScaleXZ, wall.transform.localScale.y * mazeScaleY,
                                                         wall.transform.localScale.z * mazeScaleXZ);// mazeScaleXZ;
             wall.Initialize(cell, otherCell, direction);
-            /*
-            if (otherCell != null)
-            {
-                wall = Instantiate<MazeWall>(wallPrefab);
-                //wall.transform.localScale *= mazeScaleXZ;
-                wall.transform.localScale = new Vector3(wall.transform.localScale.x * mazeScaleXZ, wall.transform.localScale.y * mazeScaleY,
-                                                        wall.transform.localScale.z * mazeScaleXZ);
-                wall.Initialize(otherCell, cell, direction.GetOpposite());
-            }
-            */
         }
 
         public IntVector2 RandomCoordinates

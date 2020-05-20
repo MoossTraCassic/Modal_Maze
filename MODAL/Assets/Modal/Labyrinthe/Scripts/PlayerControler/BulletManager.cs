@@ -122,10 +122,7 @@ namespace ModalFunctions.Utils
                 }
                 rotationReset = false;
             }
-            /*else
-            {
-                StartCoroutine(WaitAndSpawn());
-            }*/
+ 
         }
 
         IEnumerator WaitAndSpawn()
@@ -142,9 +139,9 @@ namespace ModalFunctions.Utils
                 if (!bullet.Shooted())
                 {
                     bullet.SetShooted();
-                    //bullet.transform.position += bullet.transform.forward * bulletSpeed * Time.deltaTime;
+ 
                     Vector3 bulletDirection = rayOrigin.transform.forward + 0.1f * rayOrigin.transform.up; 
-                    //bullet.GetRigidBody().AddForce(bulletDirection * bulletSpeed);
+ 
                     bullet.GetRigidBody().velocity = bulletDirection * bulletSpeed;
                     bullet.EnableGravity();
                     DestroyCurrentOrbe();
@@ -157,7 +154,7 @@ namespace ModalFunctions.Utils
             joined = false;
             activeBullet--;
             Destroy(currentOrbe, 3f);
-            //activeBullet--;
+ 
         }
 
         bool OrbeInCone()

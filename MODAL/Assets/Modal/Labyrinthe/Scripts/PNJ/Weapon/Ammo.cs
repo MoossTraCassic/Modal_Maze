@@ -7,28 +7,14 @@ namespace ModalFunctions.PNJ
 {
     public class Ammo : Projectile
     {
-        /*
-        public enum ShotType
-        {
-            HIGHEST_SHOT,
-            LOWEST_SPEED,
-            MOST_DIRECT
-        }
-
-        public ShotType shotType;
-        */
+ 
         public float projectileSpeed;
         public int damageAmount = 1;
         public LayerMask damageMask;
-        public float explosionRadius;    // For Test
+        public float explosionRadius;    //field used for Test
         public float explosionTimer = 0.1f;
         public ParticleSystem explosionVFX;
-        //[Tooltip("Will the explosion VFX play where the grenade explode or on the closest ground")]
-        // public bool vfxOnGround = false;
-
-        // public RandomAudioPlayer explosionPlayer;
-        // public RandomAudioPlayer bouncePlayer;
-
+ 
         protected float m_SinceFired;
 
         protected Weapon m_Shooter;
@@ -36,9 +22,7 @@ namespace ModalFunctions.PNJ
         protected MeshCollider m_meshCollider;
         protected ParticleSystem m_VFXInstance;
         int m_EnvironmentLayer = -1;
-
-        // protected static Collider[] m_ExplosionHitCache = new Collider[32];
-
+ 
         private void Awake()
         {
             m_EnvironmentLayer = 1 << LayerMask.NameToLayer("Ground");
@@ -68,8 +52,7 @@ namespace ModalFunctions.PNJ
 
 
             m_RigidBody.velocity = GetVelocity(target);
-            // m_RigidBody.AddRelativeTorque(Vector3.right * -5500.0f);
-
+ 
             m_RigidBody.detectCollisions = false;
             m_meshCollider.isTrigger = true;
 
@@ -89,7 +72,7 @@ namespace ModalFunctions.PNJ
 
             if (explosionTimer > 0 && m_SinceFired > explosionTimer)
             {
-                //Explosion();
+  
                 PlayFireVFX();
 
                 if (m_SinceFired > explosionTimer + 0.5f)
@@ -103,22 +86,10 @@ namespace ModalFunctions.PNJ
         public void PlayFireVFX()
         {
             Vector3 playPosition = transform.position;
-            
-            /*
-            Vector3 playNormal = Vector3.up;
-            if (vfxOnGround)
-            {
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, Vector3.down, out hit, 100.0f, m_EnvironmentLayer))
-                {
-                    playPosition = hit.point + hit.normal * 0.1f;
-                    playNormal = hit.normal;
-                }
-            }
-            */
+ 
 
             m_VFXInstance.gameObject.transform.position = playPosition;
-            // m_VFXInstance.gameObject.transform.up = playNormal;
+ 
             m_VFXInstance.time = 0.0f;
             m_VFXInstance.gameObject.SetActive(true);
             m_VFXInstance.Play(true);
@@ -131,17 +102,7 @@ namespace ModalFunctions.PNJ
 
         public void DamageCollided(Collider o)
         {
-            /*
-            if (explosionPlayer)
-            {
-                explosionPlayer.transform.SetParent(null);
-                explosionPlayer.PlayRandomClip();
-            }
-            */
-
-            // int count = Physics.OverlapSphereNonAlloc(transform.position, explosionRadius, m_ExplosionHitCache,
-            //     damageMask.value);
-
+ 
             Damageable.DamageMessage message = new Damageable.DamageMessage
             {
                 amount = damageAmount,
@@ -152,43 +113,17 @@ namespace ModalFunctions.PNJ
             };
 
 
-            // for (int i = 0; i < count; ++i)
-            // {
-            //     Damageable d = m_ExplosionHitCache[i].GetComponentInChildren<Damageable>();
-            
+ 
             Damageable d = o.GetComponent<Damageable>();
 
             if (d != null)
                 d.ApplyDamage(message);
-            // }
 
             pool.Free(this);
-
-            /*
-            Vector3 playPosition = transform.position;
-            Vector3 playNormal = Vector3.up;
-            if (vfxOnGround)
-            {
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, Vector3.down, out hit, 100.0f, m_EnvironmentLayer))
-                {
-                    playPosition = hit.point + hit.normal * 0.1f;
-                    playNormal = hit.normal;
-                }
-            }
-
-            m_VFXInstance.gameObject.transform.position = playPosition;
-            m_VFXInstance.gameObject.transform.up = playNormal;
-            m_VFXInstance.time = 0.0f;
-            m_VFXInstance.gameObject.SetActive(true);
-            m_VFXInstance.Play(true);
-            */
         }
 
         protected virtual void OnCollisionEnter(Collision other)
         {
-            // if (bouncePlayer != null)
-            //    bouncePlayer.PlayRandomClip();
 
             if ((damageMask & 1 << other.gameObject.layer) == 1 << other.gameObject.layer)
             {
@@ -202,67 +137,12 @@ namespace ModalFunctions.PNJ
         {
             Vector3 velocity = Vector3.zero;
             Vector3 toTarget = target - transform.position;
-
-            /*
-            // Set up the terms we need to solve the quadratic equations.
-            float gSquared = Physics.gravity.sqrMagnitude;
-            float b = projectileSpeed * projectileSpeed + Vector3.Dot(toTarget, Physics.gravity);
-            float discriminant = b * b - gSquared * toTarget.sqrMagnitude;
-            
-
-            // Check whether the target is reachable at max speed or less.
-            if (discriminant < 0)
-            {
-                // Debug.Log("Can't reach");
-
-                velocity = toTarget;
-                velocity.y = 0;
-                velocity.Normalize();
-                velocity.y = 0.7f;
-
-                Debug.DrawRay(transform.position, velocity * 3.0f, Color.blue);
-
-                velocity *= projectileSpeed;
-                return velocity;
-            }
-
-            float discRoot = Mathf.Sqrt(discriminant);
-
-            // Highest shot with the given max speed:
-            float T_max = Mathf.Sqrt((b + discRoot) * 2f / gSquared);
-
-            // Most direct shot with the given max speed:
-            float T_min = Mathf.Sqrt((b - discRoot) * 2f / gSquared);
-
-            // Lowest-speed arc available:
-            float T_lowEnergy = Mathf.Sqrt(Mathf.Sqrt(toTarget.sqrMagnitude * 4f / gSquared));
-            
-            float T = 0;
-            // choose T_max, T_min, or some T in-between like T_lowEnergy
-            switch (shotType)
-            {
-                case ShotType.HIGHEST_SHOT:
-                    T = T_max;
-                    break;
-                case ShotType.LOWEST_SPEED:
-                    T = T_lowEnergy;
-                    break;
-                case ShotType.MOST_DIRECT:
-                    T = T_min;
-                    break;
-                default:
-                    break;
-            }
-
-
-            // Convert from time-to-hit to a launch velocity:
-            velocity = toTarget / T - Physics.gravity * T / 2f;
-            */
+ 
 
             velocity = toTarget;
-            // velocity.y = 0;
+  
             velocity.Normalize();
-            velocity.y = 0.05f;   // Was 0.7f
+            velocity.y = 0.05f;   
 
             Debug.DrawRay(transform.position, velocity * 3.0f, Color.blue);
 

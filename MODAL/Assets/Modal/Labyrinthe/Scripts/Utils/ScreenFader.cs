@@ -106,11 +106,11 @@ namespace ModalFunctions.Utils
             {
                 CanvasGroup gameOver = Instance.gameOverCanvasGroup;
 
-                //*yield return new WaitForSeconds(1f);
+ 
 
                 yield return Instance.StartCoroutine(Instance.Fade(0f, gameOver));
 
-                //*gameOver.gameObject.SetActive(false);
+ 
             }
         }
 

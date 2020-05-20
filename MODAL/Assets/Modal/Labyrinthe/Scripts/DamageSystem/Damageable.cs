@@ -28,10 +28,6 @@ namespace ModalFunctions.DamageSystem
 
         public UnityEvent OnDeath, OnReceiveDamage, OnHitWhileInvulnerable, OnBecomeVulnerable, OnResetDamage;
 
-        // [Tooltip("When this gameObject is damaged, these other gameObjects are notified.")]
-        // [EnforceType(typeof(Message.IMessageReceiver))]
-        // public List<MonoBehaviour> onDamageMessageReceivers;
-
         protected float m_timeSinceLastHit = 0.0f;
         protected Collider m_Collider;
 
@@ -97,18 +93,9 @@ namespace ModalFunctions.DamageSystem
             currentHitPoints -= data.amount;
 
             if (currentHitPoints <= 0)
-                schedule += OnDeath.Invoke; //This avoid race condition when objects kill each other.
+                schedule += OnDeath.Invoke;
             else
                 OnReceiveDamage.Invoke();
-            /*
-            var messageType = currentHitPoints <= 0 ? MessageType.DEAD : MessageType.DAMAGED;
-
-            for (var i = 0; i < onDamageMessageReceivers.Count; ++i)
-            {
-                var receiver = onDamageMessageReceivers[i] as IMessageReceiver;
-                receiver.OnReceiveMessage(messageType, this, data);
-            }
-            */
         }
 
         void LateUpdate()

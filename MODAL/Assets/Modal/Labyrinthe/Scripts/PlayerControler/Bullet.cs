@@ -21,7 +21,6 @@ namespace ModalFunctions.Utils
             m_EnvironmentLayer = 1 << LayerMask.NameToLayer("Ground");
 
             rigidbody = GetComponent<Rigidbody>();
-            // rigidBody.collisionDetectionMode = CollisionDetectionMode.Continuous;  
 
             collider = GetComponent<Collider>();
         }
@@ -50,7 +49,6 @@ namespace ModalFunctions.Utils
         {
             collider.isTrigger = false;
 
-            //rigidbody.useGravity = true;
             rigidbody.isKinematic = false;
         }
 
@@ -58,7 +56,6 @@ namespace ModalFunctions.Utils
         {
             collider.isTrigger = true;
 
-            //rigidbody.useGravity = false;
             rigidbody.isKinematic = true;
         }
 
@@ -79,27 +76,20 @@ namespace ModalFunctions.Utils
                 throwing = true
             };
 
-
-            // for (int i = 0; i < count; ++i)
-            // {
-            //     Damageable d = m_ExplosionHitCache[i].GetComponentInChildren<Damageable>();
-            
             Damageable d = o.GetComponent<Damageable>();
 
             if (d != null)
                 d.ApplyDamage(message);
-            // }
+  
         }
 
         protected virtual void OnCollisionEnter(Collision other)
         {
-            // if (bouncePlayer != null)
-            //    bouncePlayer.PlayRandomClip();
-
+ 
             if ((damageMask & 1 << other.gameObject.layer) == 1 << other.gameObject.layer)
             {
                 print("Touched PNJ");
-                //gameObject.SetActive(false);
+ 
                 DamageCollided(other.collider);
             }
         }

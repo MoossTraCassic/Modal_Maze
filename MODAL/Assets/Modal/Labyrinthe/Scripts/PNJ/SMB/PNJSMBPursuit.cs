@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -34,10 +34,7 @@ namespace ModalFunctions.PNJ
 
             if (m_MonoBehaviour.target != null)
             {
-                // Chomper
-                //**m_MonoBehaviour.RequestTargetPosition();
-
-                
+               
                 Vector3 targetPos = m_MonoBehaviour.target.transform.position;
                 
                 Vector3 toTarget = m_MonoBehaviour.target.transform.position - m_MonoBehaviour.transform.position;
@@ -46,42 +43,20 @@ namespace ModalFunctions.PNJ
                 
                 m_MonoBehaviour.controller.SetTarget(targetPos);
 
-                /*
-                if (distToTarget <= m_MonoBehaviour.meleeRange * m_MonoBehaviour.meleeRange)
-                {
-                    m_MonoBehaviour.OrientTowardTarget();
-                    animator.SetTrigger(GrenadierBehaviour.hashMeleeAttack);
-                    animator.SetBool(GrenadierBehaviour.hashInPursuitParam, false);
-                }
-                */
                 Damageable damagePlayer = m_MonoBehaviour.target.m_damageable;
 
                 bool attackable = damagePlayer.currentHitPoints > 0;
-                // else if (distToTarget <= m_MonoBehaviour.rangeRange * m_MonoBehaviour.rangeRange)
-                if (distToTarget <= m_MonoBehaviour.rangeRange * m_MonoBehaviour.rangeRange && attackable)
+               if (distToTarget <= m_MonoBehaviour.rangeRange * m_MonoBehaviour.rangeRange && attackable)
                 {
                     m_MonoBehaviour.OrientTowardTarget();
                     animator.SetTrigger(PNJBehaviour.hashRangeAttack);
                     animator.SetBool(PNJBehaviour.hashInPursuitParam, false);   //TODO: Try with deselected
                 }
-                /*else if (m_MonoBehaviour.followerData.assignedSlot != -1)
-                {
-                    Vector3 targetPoint = m_MonoBehaviour.target.transform.position +
-                        m_MonoBehaviour.followerData.distributor.GetDirection(m_MonoBehaviour.followerData
-                            .assignedSlot) * m_MonoBehaviour.rangeRange * 0.9f;
-
-                    m_MonoBehaviour.controller.SetTarget(targetPoint);
-                }
-                else
-                {
-                    m_MonoBehaviour.StopPursuit();
-                }*/
-
+             
             }
             else
             {
-                //animator.SetBool(GrenadierBehaviour.hashInPursuitParam, false);
-                m_MonoBehaviour.StopPursuit();
+             m_MonoBehaviour.StopPursuit();
             }
         }
     }

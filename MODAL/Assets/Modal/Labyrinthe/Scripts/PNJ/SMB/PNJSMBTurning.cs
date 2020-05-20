@@ -26,15 +26,8 @@ namespace ModalFunctions.PNJ
 
         float angle = Vector3.SignedAngle(originalForward, v, Vector3.up);
 
-	    /*if(Mathf.Abs(angle) <= 20.0f)
-        { 
-            //animator.SetTrigger(PNJBehaviour.hashSpotted); Debug.Log("0");
-            m_MonoBehaviour.transform.forward = v.normalized;
-        }*/
-        
-        {
         animator.SetFloat(PNJBehaviour.hashTurnAngleParam, angle / 180.0f);
-        }
+        
 	    Vector3 newForward = new Vector3(originalForward.x + angle,0f,originalForward.z + angle);
 	    m_MonoBehaviour.transform.forward = Vector3.Lerp(originalForward,newForward,Mathf.Abs(angle));
         }

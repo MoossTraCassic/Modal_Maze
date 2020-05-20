@@ -12,14 +12,14 @@ namespace ModalFunctions.Utils
 		public Transform target;
 
 		private AimIK m_aimIK;
-		//private Animator m_animator;
+ 
 		private bool m_target;
 
 		private float m_setTime;
 
 		void Start()
 		{
-			//m_animator = GetComponent<Animator>();
+ 
 
 			m_aimIK = GetComponent<AimIK>();
 			m_aimIK.enabled = false;
@@ -27,8 +27,8 @@ namespace ModalFunctions.Utils
 
 		void CheckFireStatus()
 		{
-			m_target = PlayerController.instance.p_inFirePose;//m_animator.GetBool("GoFire");
-			//Debug.Log(m_target);
+			m_target = PlayerController.instance.p_inFirePose; 
+ 
 		}
 
 
@@ -46,7 +46,7 @@ namespace ModalFunctions.Utils
 			else
 			{
 				m_aimIK.enabled = false;
-				//m_aimIK.solver.transform.LookAt(target.position + offset);
+ 
 			}
 		}
 	}

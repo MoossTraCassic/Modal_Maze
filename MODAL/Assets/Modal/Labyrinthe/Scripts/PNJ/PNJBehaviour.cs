@@ -41,20 +41,12 @@ namespace ModalFunctions.PNJ
 
         public TargetScanner playerScanner;
 
-        // public float meleeRange = 4.0f;
         public float rangeRange = 10.0f;
 
-        // public MeleeWeapon fistWeapon;
         public Weapon rifle;
-
-        // public GameObject shield;
-
-        // public SkinnedMeshRenderer coreRenderer;
 
         protected PNJController m_EnemyController;
         protected NavMeshAgent m_NavMeshAgent;
-
-        // public bool shieldUp { get { return shield.activeSelf; } }
 
         public PlayerController target { get { return m_Target; } }
         public Damageable damageable { get { return m_Damageable; } }
@@ -70,17 +62,9 @@ namespace ModalFunctions.PNJ
         
 
         protected PlayerController m_Target;
-        //used to store the position of the target when the TraptionGuard decide to shoot, so if the player
-        //move between the start of the animation and the actual grenade launch, it shoot were it was not where it is now
         protected Vector3 m_AmmoTarget;
-        // protected Material m_CoreMaterial;
 
         protected Damageable m_Damageable;
-        // protected Color m_OriginalCoreMaterial;
-
-        // protected float m_ShieldActivationTime;
-
-        // From Chomper
         public TargetDistributor.TargetFollower followerData { get { return m_FollowerInstance; } }
         public Vector3 originalPosition { get; protected set; }
         [Tooltip("Time in seconde before the Chomper stop pursuing the player when the player is out of sight")]
@@ -97,19 +81,10 @@ namespace ModalFunctions.PNJ
 
             SceneLinkedSMB<PNJBehaviour>.Initialise(m_EnemyController.animator, this);
 
-            // fistWeapon.SetOwner(gameObject);
-            // fistWeapon.EndAttack();
-
-            // m_CoreMaterial = coreRenderer.materials[1];
-            // m_OriginalCoreMaterial = m_CoreMaterial.GetColor("_Color2");
-
             m_EnemyController.animator.Play(hashIdleState, 0, Random.value);
-
-            // shield.SetActive(false);
 
             m_Damageable = GetComponent<Damageable>();
 
-            // From Chomper
             originalPosition = transform.position;
         }
         protected void OnDisable()
@@ -124,24 +99,9 @@ namespace ModalFunctions.PNJ
                  spottedAudioPlayer.PlayRandomClip();
         }
 
-        /*
-        private void Update()
-        {
-            
-            if (m_ShieldActivationTime > 0)
-            {
-                m_ShieldActivationTime -= Time.deltaTime;
 
-                if (m_ShieldActivationTime <= 0.0f)
-                    DeactivateShield();
-            }
-            
-        }
-        */
         private void FixedUpdate()
         {
-            
-            //**m_Controller.animator.SetBool(hashGrounded, controller.grounded);
 
             Vector3 toBase = originalPosition - transform.position;
             toBase.y = 0;
@@ -154,71 +114,11 @@ namespace ModalFunctions.PNJ
         public void FindTarget()
         {
             m_Target = playerScanner.Detect(transform);
-            
-	    
-            // From Chomper
-            //we ignore height difference if the target was already seen
-            /*PlayerControllerTest target = playerScanner.Detect(transform);
-
-            if (m_Target == null)
-            {
-                //we just saw the player for the first time, pick an empty spot to target around them
-                if (target != null)
-                {
-                    m_EnemyController.animator.SetTrigger(hashSpotted);  
-                    m_Target = target;
-                    TargetDistributor distributor = target.GetComponentInChildren<TargetDistributor>();
-                    if (distributor != null)
-                        m_FollowerInstance = distributor.RegisterNewFollower();
-                }
-            }
-            else
-            {
-                //we lost the target. But chomper have a special behaviour : they only loose the player scent if they move past their detection range
-                //and they didn't see the player for a given time. Not if they move out of their detectionAngle. So we check that this is the case before removing the target
-                if (target == null)
-                {
-                    m_TimerSinceLostTarget += Time.deltaTime;
-
-                    if (m_TimerSinceLostTarget >= timeToStopPursuit)
-                    {
-                        Vector3 toTarget = m_Target.transform.position - transform.position;
-
-                        if (toTarget.sqrMagnitude > playerScanner.detectionRadius * playerScanner.detectionRadius)
-                        {
-                            if (m_FollowerInstance != null)
-                                m_FollowerInstance.distributor.UnregisterFollower(m_FollowerInstance);
-
-                            //the target move out of range, reset the target
-                            m_Target = null;
-                        }
-                    }
-                }
-                else
-                {
-                    if (target != m_Target)
-                    {
-                        if (m_FollowerInstance != null)
-                            m_FollowerInstance.distributor.UnregisterFollower(m_FollowerInstance);
-
-                        m_Target = target;
-
-                        TargetDistributor distributor = target.GetComponentInChildren<TargetDistributor>();
-                        if (distributor != null)
-                            m_FollowerInstance = distributor.RegisterNewFollower();
-                    }
-
-                    m_TimerSinceLostTarget = 0.0f;
-                }
-            }*/
-        
         }
 
         public void StartPursuit()
         {
-            // m_EnemyController.animator.SetBool(hashInPursuitParam, true);
 
-            // From Chomper
             if (m_FollowerInstance != null)
             {
                 m_FollowerInstance.requireSlot = true;
@@ -238,9 +138,7 @@ namespace ModalFunctions.PNJ
 
         public void StopPursuit()
         {
-            // m_EnemyController.animator.SetBool(hashInPursuitParam, false);
 
-            // From Chomper
             if (m_FollowerInstance != null)
             {
                 m_FollowerInstance.requireSlot = false;
@@ -259,24 +157,13 @@ namespace ModalFunctions.PNJ
             m_EnemyController.SetFollowNavmeshAgent(true);
         }
 
-        /*
-        public void StartAttack()
-        {
-            fistWeapon.BeginAttack(true);
-        }
-        
-        public void EndAttack()
-        {
-            fistWeapon.EndAttack();
-        }
-        */
 
         public void Hit()
         {
             if(damageAudioPlayer != null) 
                 damageAudioPlayer.PlayRandomClip();
             m_EnemyController.animator.SetTrigger(hashHitParam);
-            // m_CoreMaterial.SetColor("_Color2", Color.red);
+
         }
 
         public void Die()
@@ -285,26 +172,6 @@ namespace ModalFunctions.PNJ
                 deathAudioPlayer.PlayRandomClip();
             m_EnemyController.animator.SetTrigger(hashDeathParam);
         }
-
-        /*
-        public void ActivateShield()
-        {
-            shield.SetActive(true);
-            m_ShieldActivationTime = 3.0f;
-            m_Damageable.SetColliderState(false);
-        }
-
-        public void DeactivateShield()
-        {
-            shield.SetActive(false);
-            m_Damageable.SetColliderState(true);
-        }
-
-        public void ReturnVulnerable()
-        {
-            m_CoreMaterial.SetColor("_Color2", m_OriginalCoreMaterial);
-        }
-        */
 
         public void RememberTargetPosition()
         {
@@ -324,9 +191,6 @@ namespace ModalFunctions.PNJ
 
             Vector3 toTarget = m_AmmoTarget - transform.position;
 
-            //the bullet is launched a couple of meters in "front" of the player, because it bounce and roll, to make it a bit ahrder for the player
-            //to avoid it
-            //**Vector3 target = transform.position + (toTarget - toTarget * 0.1f);
             Vector3 target = transform.position + (toTarget + Vector3.up * 0.1f);
 
             rifle.Attack(target);
@@ -343,8 +207,7 @@ namespace ModalFunctions.PNJ
             if (Mathf.Abs(angle) < 20.0f)
             { //for a very small angle, we directly rotate the model
                 transform.forward = v.normalized;
-                // if the player was above the player we return false to tell the Idle state 
-                // that we want a "shield up" attack as our punch attack wouldn't reach it.
+
                 return above ? OrientationState.ORIENTED_ABOVE : OrientationState.ORIENTED_FACE;
             }
 

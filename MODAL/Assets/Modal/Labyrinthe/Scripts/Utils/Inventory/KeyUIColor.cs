@@ -20,9 +20,7 @@ namespace ModalFunctions.Utils
         private Color m_UpdatedColor;
         private Material m_CoreMaterial;
 
-        //**protected Animator[] m_KeyIconAnimators;
-
-        //**protected readonly int m_HashActivePara = Animator.StringToHash("Active");
+ 
         protected const float k_KeyIconAnchorWidth = 0.041f;
 
         private void Awake()
@@ -37,18 +35,7 @@ namespace ModalFunctions.Utils
 
         public void SetInitialKeyCount()
         {
-            //m_IconRenderer = keyIconPrefab.GetComponent<MeshRenderer>();
-            //m_CoreMaterial = m_IconRenderer.sharedMaterials[0];
-
-            //m_OriginalCoreMaterial = m_CoreMaterial.GetColor("_Color");
-            /*
-            if (m_KeyIconAnimators != null && m_KeyIconAnimators.Length == keyNames.Length)
-                return;
-
-            m_KeyIconAnimators = new Animator[keyNames.Length];
-
-            for (int i = 0; i < m_KeyIconAnimators.Length; i++)
-            {*/
+ 
             GameObject healthIcon = Instantiate(keyIconPrefab);
             healthIcon.transform.SetParent(transform);
             RectTransform healthIconRect = healthIcon.transform as RectTransform;
@@ -61,13 +48,9 @@ namespace ModalFunctions.Utils
             healthIconRect.localRotation = Quaternion.identity;
 
             m_CoreMaterial = keyIconPrefab.GetComponent<MeshRenderer>().sharedMaterials[0];
-            //m_CoreMaterial.SetColor("_Color", m_OriginalCoreMaterial);
-            //Debug.Log(m_CoreMaterial == null);
+ 
             m_OriginalCoreMaterial = m_CoreMaterial.GetColor("_Color");
-            /*
-                //m_KeyIconAnimators[i] = healthIcon.GetComponent<Animator>();
-            /*}
-            */
+  
         }
 
         public void ResetMaterial()
@@ -82,15 +65,14 @@ namespace ModalFunctions.Utils
 
             for (int i = 0; i < keyNames.Length; i++)
             {
-                //m_KeyIconAnimators[i].SetBool(m_HashActivePara, controller.HasItem(keyNames[i]));
+ 
                 if (controller.HasItem(keyNames[i]))
                 {
                     Debug.Log("ColorUp");
                     m_UpdatedColor = Color.Lerp(m_UpdatedColor, materialList[i].GetColor("_Color"), 0.6f);// += materialDic(keyNames[i]);
                 }
             }
-            //Debug.Log("Material : " + m_CoreMaterial == null);
-            //Debug.Log(m_UpdatedColor);
+ 
             if(m_CoreMaterial != null)m_CoreMaterial.SetColor("_Color", m_UpdatedColor);
         }
 

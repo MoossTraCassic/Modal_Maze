@@ -32,7 +32,7 @@ namespace ModalFunctions.Utils
 
         void Reset()
         {
-            //*layers = LayerMask.NameToLayer("Everything");
+ 
             collider = GetComponent<Collider>();
             collider.isTrigger = true;
             dataSettings = new DataSettings();
@@ -40,7 +40,7 @@ namespace ModalFunctions.Utils
 
         void OnTriggerEnter(Collider other)
         {
-            //if (layers.Contains(other.gameObject)) 
+ 
             if((layers & 1 << other.gameObject.layer) == 1 << other.gameObject.layer)
             {
                 var ic = other.GetComponent<InventoryController>();
@@ -50,7 +50,7 @@ namespace ModalFunctions.Utils
                     OnDestroy.Invoke();
                     Save();
                     StartCoroutine(Disable(gameObject));
-                    //gameObject.SetActive(false);
+ 
                 }
 
                 if (clip) AudioSource.PlayClipAtPoint(clip, transform.position);
